@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   fdf_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/20 15:00:21 by jquenel           #+#    #+#             */
-/*   Updated: 2017/12/22 12:45:31 by jquenel          ###   ########.fr       */
+/*   Created: 2017/12/22 10:00:01 by jquenel           #+#    #+#             */
+/*   Updated: 2017/12/22 12:46:58 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mlx.h>
 #include "fdf.h"
+#include <stdlib.h>
 
-int			main(int argc, char **argv)
+void		fdf_init_env(t_env **env)
 {
-	t_env	*env;
-
-	//ft_errcheck("", (argc != 2));
-	printf("0\n");
-	fdf_init_env(&env);
-	printf("1\n");
-	fdf_parser(env, argv[1]);
-	printf("2\n");
-	mlx_loop_hook(MLX, env->map->type == 1 ? fdf_draw1 : fdf_draw2, env);
-	printf("3\n");
-	mlx_loop(MLX);
-	return (argc);
+	//ft_errcheck
+	*env = (t_env *)malloc(sizeof(t_env));
+	(*env)->mlx = mlx_init();
+	(*env)->win_fdf = mlx_new_window((*env)->mlx, WIDTH, HEIGHT, "fdf");
+	//(*env)->win_help = mlx_new_window((*env)->mlx, 400, 400, "fdf_help");
+	(*env)->map = (t_map *)malloc(sizeof(t_map));
+	(*env)->map->type = 0;
+	(*env)->map->node = NULL;
+	(*env)->map->face = NULL;
 }
+

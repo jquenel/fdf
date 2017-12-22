@@ -11,6 +11,11 @@ OBJ_PATH=	obj
 CPPFLAGS=	-Iinclude
 
 SRC_NAME=	main.c\
+			fdf_init.c\
+			fdf_parser.c\
+			fdf_nodes.c\
+			fdf_draw2.c\
+			fdf_tlst.c\
 
 SRC=		$(addprefix $(SRC_PATH)/,$(SRC_NAME))
 
@@ -26,9 +31,9 @@ CFLAGS=		-Werror -Wextra -Wall -O3
 
 CC=			clang
 
-LDFLAGS=	-Llibft -Llibmat
+LDFLAGS=	-Llibft -Llibmat -L/usr/local/lib
 
-LIBS=		-lft -lmat
+LIBS=		-lft -lmat -lmlx -framework OpenGL -framework AppKit
 
 LDLIBS=		$(LDFLAGS) $(LIBS)
 

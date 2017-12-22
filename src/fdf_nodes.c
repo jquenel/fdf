@@ -1,20 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_v3d_copy.c                                      :+:      :+:    :+:   */
+/*   fdf_nodes.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/21 16:13:45 by jquenel           #+#    #+#             */
-/*   Updated: 2017/12/22 12:41:16 by jquenel          ###   ########.fr       */
+/*   Created: 2017/12/22 11:15:40 by jquenel           #+#    #+#             */
+/*   Updated: 2017/12/22 12:51:13 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libmat.h"
+#include "fdf.h"
+#include <stdlib.h>
 
-void		ft_v3d_copy(t_v3d *vd, t_v3d vs)
+void		fdf_addnode(t_node	**node, t_v3d v)
 {
-	vd->x = vs.x;
-	vd->y = vs.y;
-	vd->z = vs.z;
+	t_node		*fresh;
+	t_node		*tmp;
+
+	tmp = *node;
+	//ft_errcheck
+	fresh = malloc(sizeof(t_node));
+	ft_v3d_copy(&(fresh->v), v);
+	fresh->face = NULL;
+	fresh->next = NULL;
+	while (tmp && tmp->next)
+		tmp = tmp->next;
+	if (tmp)
+	{
+		tmp->next = fresh;
+		fresh->prev = tmp;
+	}
+	else
+		*node = fresh;
 }

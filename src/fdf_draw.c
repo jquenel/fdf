@@ -1,20 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_v3d_copy.c                                      :+:      :+:    :+:   */
+/*   fdf_draw.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/21 16:13:45 by jquenel           #+#    #+#             */
-/*   Updated: 2017/12/22 12:41:16 by jquenel          ###   ########.fr       */
+/*   Created: 2017/12/22 11:24:06 by jquenel           #+#    #+#             */
+/*   Updated: 2017/12/22 12:44:54 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libmat.h"
+#include "fdf.h"
 
-void		ft_v3d_copy(t_v3d *vd, t_v3d vs)
+int			fdf_draw2(t_env *env)
 {
-	vd->x = vs.x;
-	vd->y = vs.y;
-	vd->z = vs.z;
+	t_node		*node;
+	int			dx;
+	int			dy;
+
+	dx = WIDTH / 2 - env->map->w;
+	dy = HEIGHT / 2 - env->map->h;
+	node = env->map->node;
+	while (node)
+	{
+		mlx_pixel_put(MLX, WIN, node->v.x + dx, node->v.y + dy, 0x00FFFFFF);
+		node = node->next;
+	}
+	return (1);
 }
