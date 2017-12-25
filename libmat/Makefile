@@ -16,6 +16,8 @@ SRC_LIST=	ft_v3d_add.c\
 			ft_v3d_x_v3d.c\
 			ft_v3d_x_mx4.c\
 			ft_mx4_x_mx4.c\
+			ft_mx4_rot.c\
+			ft_mx4_transl.c\
 
 INC_LIST=	libmat.h\
 
@@ -27,7 +29,7 @@ TMP_OBJ=	$(SRC_LIST:%.c=%.o)
 
 INC=		$(INC_LIST:%=$(H_PATH)%)
 
-CFLAGS=		-Werror -Wextra -Wall -O3
+CFLAGS=		-Wextra -Wall -O3 -lm
 
 CC=			gcc
 

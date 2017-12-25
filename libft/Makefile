@@ -129,7 +129,7 @@ TMP_OBJ=	$(SRCS_LIST:%.c=%.o)
 
 INC=		$(INC_LIST:%=$(H_PATH)%)
 
-CFLAGS=		-Werror -Wextra -Wall -O3
+CFLAGS=		-Wextra -Wall -O3
 
 CC=			gcc
 

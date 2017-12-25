@@ -13,8 +13,12 @@ CPPFLAGS=	-Iinclude
 SRC_NAME=	main.c\
 			fdf_init.c\
 			fdf_parser.c\
+			fdf_loadmatrix.c\
 			fdf_nodes.c\
+			fdf_face.c\
+			fdf_edge.c\
 			fdf_draw2.c\
+			fdf_keyevent.c\
 			fdf_tlst.c\
 
 SRC=		$(addprefix $(SRC_PATH)/,$(SRC_NAME))
@@ -27,13 +31,15 @@ OBJ_NAME=	$(SRC_NAME:.c=.o)
 ##		COMPILER FLAGS
 ##
 
-CFLAGS=		-Werror -Wextra -Wall -O3
+CFLAGS=		-Wextra -Wall -O3
 
-CC=			clang
+CC=			gcc
 
+##LDFLAGS=	-Llibft -Llibmat -L/usr/local/lib
 LDFLAGS=	-Llibft -Llibmat -L/usr/local/lib
 
-LIBS=		-lft -lmat -lmlx -framework OpenGL -framework AppKit
+LIBS=		-lft -lmat -lmlx -lX11 -lXext -lm
+##LIBS=		-lft -lmat -lmlx -framework OpenGL -framework AppKit
 
 LDLIBS=		$(LDFLAGS) $(LIBS)
 

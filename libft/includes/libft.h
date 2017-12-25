@@ -37,6 +37,10 @@
 **		'==================================================================='
 */
 
+# define ABS(x)		x < 0 ? x * -1 : x
+# define MIN(x, y)	x < y ? x : y
+# define MAX(x, y)	x < y ? y : x
+
 /*
 **         SOME STRUCTS
 */

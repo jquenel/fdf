@@ -19,6 +19,9 @@
 # define MLX		env->mlx
 # define WIN		env->win_fdf
 # define WINH		env->win_help
+# define CAM(x)		(env->cam->x)
+# define MAP(x)		(env->map->x)
+# define MAX_NFACE	16
 
 /*
 **		Faces should always be triangles.
@@ -27,8 +30,16 @@
 		should be superior or equal to 0 when computed in that order.
 */
 
+typedef struct			s_edge
+{
+	struct s_node	*n1;
+	struct s_node	*n2;
+	struct s_edge	*next;
+}						t_edge;
+
 typedef struct			s_face
 {
+	t_edge			*edge;
 	struct s_node	*a;
 	struct s_node	*b;
 	struct s_node	*c;
@@ -38,7 +49,7 @@ typedef struct			s_face
 typedef struct			s_node
 {
 	t_v3d			v;
-	t_face			*face;
+	t_face			*face[MAX_NFACE];
 	struct s_node	*next;
 	struct s_node	*prev;
 }						t_node;
@@ -49,8 +60,17 @@ typedef struct			s_map
 	int				w;
 	int				h;
 	t_node			*node;
+	t_node			**nlist;
 	t_face			*face;
 }						t_map;
+
+typedef struct			s_cam
+{
+	t_v3d			pos;
+	t_v3d			angle;
+	t_v3d			focal;
+	float			speed;
+}						t_cam;
 
 typedef struct			s_env
 {
@@ -58,7 +78,7 @@ typedef struct			s_env
 	void			*win_fdf;
 	void			*win_help;
 	t_map			*map;
-	
+	t_cam			*cam;
 }						t_env;
 
 typedef struct			s_tlist
@@ -66,4 +86,5 @@ typedef struct			s_tlist
 	char			**tab;
 	struct s_tlist	*next;
 }						t_tlist;
+
 #endif

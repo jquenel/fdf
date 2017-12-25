@@ -24,6 +24,7 @@ int			fdf_draw2(t_env *env)
 	while (node)
 	{
 		mlx_pixel_put(MLX, WIN, node->v.x + dx, node->v.y + dy, 0x00FFFFFF);
+		//mlx_pixel_put(MLX, WIN, node->v.y + dy, node->v.x + dx, 0x00FFFFFF);
 		node = node->next;
 	}
 	return (1);

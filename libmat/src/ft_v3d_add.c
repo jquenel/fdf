@@ -12,9 +12,12 @@
 
 #include "libmat.h"
 
-void		ft_v3d_add(t_v3d *v1, t_v3d const v2)
+t_v3d		ft_v3d_add(t_v3d const v1, t_v3d const v2)
 {
-	v1->x += v2.x;
-	v1->y += v2.y;
-	v1->z += v2.z;
+	t_v3d	v;
+
+	v.x = v1.x + v2.x;
+	v.y = v1.y + v2.y;
+	v.z = v1.z + v2.z;
+	return (v);
 }

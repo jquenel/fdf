@@ -12,9 +12,15 @@
 
 #include "libmat.h"
 
-void		ft_v3d_x_mx4(t_v3d *v, t_mx4 const m)
+t_v3d				ft_v3d_x_mx4(t_v3d const v, t_mx4 const m)
 {
-	v->x = v->x * (m.mat[0][0] + m.mat[0][1] + m.mat[0][2]) + m.mat[0][3];
-	v->y = v->y * (m.mat[1][0] + m.mat[1][1] + m.mat[1][2]) + m.mat[1][3];
-	v->z = v->z * (m.mat[2][0] + m.mat[2][1] + m.mat[2][2]) + m.mat[2][3];
+	t_v3d		nv;
+
+	nv.x = v.x * m.mat[0][0] + v.y * m.mat[0][1] +
+			v.z * m.mat[0][2] + m.mat[0][3];
+	nv.y = v.x * m.mat[1][0] + v.y * m.mat[1][1] +
+			v.z * m.mat[1][2] + m.mat[1][3];
+	nv.z = v.x * m.mat[2][0] + v.y * m.mat[2][1] +
+			v.z * m.mat[2][2] + m.mat[2][3];
+	return (nv);
 }

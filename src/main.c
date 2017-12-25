@@ -23,6 +23,7 @@ int			main(int argc, char **argv)
 	printf("1\n");
 	fdf_parser(env, argv[1]);
 	printf("2\n");
+	mlx_key_hook(WIN, fdf_keyevent, env);
 	mlx_loop_hook(MLX, env->map->type == 1 ? fdf_draw1 : fdf_draw2, env);
 	printf("3\n");
 	mlx_loop(MLX);

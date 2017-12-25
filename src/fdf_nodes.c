@@ -13,16 +13,34 @@
 #include "fdf.h"
 #include <stdlib.h>
 
+int			fdf_nodecount(t_env *env)
+{
+	t_node	*tmp;
+	int		i;
+
+	tmp = MAP(node);
+	i = 0;
+	while (tmp)
+	{
+		i++;
+		tmp = tmp->next;
+	}
+	return (i);
+}
+
 void		fdf_addnode(t_node	**node, t_v3d v)
 {
 	t_node		*fresh;
 	t_node		*tmp;
+	int			i;
 
 	tmp = *node;
 	//ft_errcheck
 	fresh = malloc(sizeof(t_node));
 	ft_v3d_copy(&(fresh->v), v);
-	fresh->face = NULL;
+	i = 0;
+	while (i < MAX_NFACE)
+		fresh->face[i++] = NULL;
 	fresh->next = NULL;
 	while (tmp && tmp->next)
 		tmp = tmp->next;

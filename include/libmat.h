@@ -26,14 +26,19 @@ typedef struct		s_mx4
 }					t_mx4;
 
 t_v3d				ft_v3d_new(double x, double y, double z);
-void				ft_v3d_add(t_v3d *v1, t_v3d const v2);
-void				ft_v3d_sub(t_v3d *v1, t_v3d const v2);
-void				ft_v3d_norm(t_v3d *v);
+t_v3d				ft_v3d_add(t_v3d const v1, t_v3d const v2);
+t_v3d				ft_v3d_sub(t_v3d const v1, t_v3d const v2);
+t_v3d				ft_v3d_normalize(t_v3d const v);
 double				ft_v3d_dir(t_v3d const v);
 double				ft_v3d_mag(t_v3d const v);
 void				ft_v3d_copy(t_v3d *vd, t_v3d vs);
 
-void				ft_v3d_x_mx4(t_v3d *v, t_mx4 const m);
-void				ft_mx4_x_mx4(t_mx4 *m1, t_mx4 const m2);
+t_v3d				ft_v3d_x_mx4(t_v3d const v, t_mx4 const m);
+t_mx4				ft_mx4_x_mx4(t_mx4 m1, t_mx4 m2);
+t_mx4				ft_mx4_rot(t_v3d angle);
+t_mx4				xrot_mx4(double r);
+t_mx4				yrot_mx4(double r);
+t_mx4				zrot_mx4(double r);
+t_mx4				ft_mx4_transl(t_v3d v);
 
 #endif
