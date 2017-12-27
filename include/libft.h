@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/20 15:15:15 by jquenel           #+#    #+#             */
-/*   Updated: 2017/12/16 04:55:56 by jquenel          ###   ########.fr       */
+/*   Updated: 2017/12/26 14:53:37 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,5 +165,7 @@ void			ft_lstinsert(t_list *prev, t_list *newl);
 size_t			ft_lstlen(t_list *lst);
 t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 void			ft_lstiter(t_list *lst, void (*f)(t_list *elem));
+
+void			ft_err(int c, char *err_m, int ms, ...);
 
 #endif

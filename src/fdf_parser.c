@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 10:19:47 by jquenel           #+#    #+#             */
-/*   Updated: 2017/12/22 12:49:58 by jquenel          ###   ########.fr       */
+/*   Updated: 2017/12/27 21:46:48 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@
 **		ND-----NC
 */
 
-#define NA		MAP(nlist)[i]
-#define NB		MAP(nlist)[i + 1]
-#define	NC		MAP(nlist)[i + MAP(w) + 1]
-#define ND		MAP(nlist)[i + MAP(w)]
+#define NA		(MAP(nlist)[i])
+#define NB		(MAP(nlist)[i + 1])
+#define	NC		(MAP(nlist)[i + MAP(h) + 1])
+#define ND		(MAP(nlist)[i + MAP(h)])
 
 static void			fdf_filechecker(t_tlist *tabs)
 {
@@ -37,6 +37,7 @@ static void			fdf_filechecker(t_tlist *tabs)
 void				fdf_get_nlist(t_env *env)
 {
 	int		i;
+	int		j;
 	t_node	*tmp;
 
 	tmp = MAP(node);
@@ -44,10 +45,12 @@ void				fdf_get_nlist(t_env *env)
 	//checkerror
 	MAP(nlist) = malloc(sizeof(t_node *) * (i + 1));
 	MAP(nlist)[i] = NULL;
-	while (i--)
+	j = 0;
+	while (j < i)
 	{
-		MAP(nlist)[i] = tmp;
+		MAP(nlist)[j] = tmp;
 		tmp = tmp->next;
+		j++;
 	}
 }
 
@@ -60,6 +63,7 @@ void				fdf_facebuilder(t_env *env)
 	tmp = env->map->node;
 	printf("getting nlist...");
 	fdf_get_nlist(env);
+	printf("OK\n");
 	while (tmp)
 	{
 		tmp->v.x -= env->map->w / 2;
@@ -71,25 +75,31 @@ void				fdf_facebuilder(t_env *env)
 	i = 0;
 	printf("getting nodecount...");
 	node_count = fdf_nodecount(env);
+	printf("OK\n");
 	printf("building faces...");
-	while (MAP(nlist)[i] && i + MAP(w) < node_count)
+	while (NA && NB && ND && NC && i + MAP(h) < node_count)
 	{
-		printf("
-		if ((i + 1) % MAP(w))
+		if ((i + 1) % MAP(h))
 		{
-			if (ABS(NA->v.z - NC->v.z) < ABS(NB->v.z - ND->v.z))
+			if ((ABS(NA->v.z - NC->v.z)) > (ABS(NB->v.z - ND->v.z)))
 			{
 				fdf_addface(&MAP(face), fdf_newface(NA, NB, ND));
 				fdf_addface(&MAP(face), fdf_newface(NB, NC, ND));
+			//if (MAP(face))
+			//	printf("added face\n");
 			}
 			else
 			{
 				fdf_addface(&MAP(face), fdf_newface(NA, NB, NC));
 				fdf_addface(&MAP(face), fdf_newface(NA, NC, ND));
+			//if (MAP(face))
+			//	printf("added face\n");
 			}
 		}
 		i++;
 	}
+	//read_face(env);
+	printf("OK\n");
 }
 
 void				fdfer(t_env *env, int fd)
@@ -109,10 +119,10 @@ void				fdfer(t_env *env, int fd)
 	j = 0;
 	while (tabs)
 	{
-		j = 0;
-		while ((tabs->tab)[j])
-			fdf_addnode(&(env->map->node), ft_v3d_new(i, j,
-						ft_atoi((tabs->tab)[j++])));
+		j = -1;
+		while ((tabs->tab)[++j])
+			fdf_addnode(&(env->map->node), fdf_newnode(ft_v3d_new(i, j,
+						ft_atoi((tabs->tab)[j]))));
 		tabs = tabs->next;
 		i++;
 	}
@@ -137,4 +147,5 @@ void				fdf_parser(t_env *env, char *arg)
 		env->map->type = 2;
 		fdfer(env, fd);
 	}
+	printf("Finished parsing.\n");
 }

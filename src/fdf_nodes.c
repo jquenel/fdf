@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 11:15:40 by jquenel           #+#    #+#             */
-/*   Updated: 2017/12/22 12:51:13 by jquenel          ###   ########.fr       */
+/*   Updated: 2017/12/26 16:13:56 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,27 +28,35 @@ int			fdf_nodecount(t_env *env)
 	return (i);
 }
 
-void		fdf_addnode(t_node	**node, t_v3d v)
+t_node		*fdf_newnode(t_v3d v)
 {
-	t_node		*fresh;
-	t_node		*tmp;
+	t_node		*n;
 	int			i;
 
-	tmp = *node;
-	//ft_errcheck
-	fresh = malloc(sizeof(t_node));
-	ft_v3d_copy(&(fresh->v), v);
-	i = 0;
-	while (i < MAX_NFACE)
-		fresh->face[i++] = NULL;
-	fresh->next = NULL;
-	while (tmp && tmp->next)
-		tmp = tmp->next;
-	if (tmp)
-	{
-		tmp->next = fresh;
-		fresh->prev = tmp;
-	}
+	ft_err(!(n = (t_node *)malloc(sizeof(t_node))), ERR_M, 0);
+	n->v.x = v.x;
+	n->v.y = v.y;
+	n->v.z = v.z;
+	n->next = NULL;
+	n->prev = NULL;
+	i = -1;
+	while (++i < MAX_NFACE)
+		n->face[i] = NULL;
+	return (n);
+}
+
+void		fdf_addnode(t_node	**node1, t_node *node2)
+{
+	t_node		*tmp;
+
+	if (!*node1)
+		*node1 = node2;
 	else
-		*node = fresh;
+	{
+		tmp = *node1;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = node2;
+		node2->prev = tmp;
+	}
 }

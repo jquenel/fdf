@@ -15,11 +15,15 @@ SRC_NAME=	main.c\
 			fdf_parser.c\
 			fdf_loadmatrix.c\
 			fdf_nodes.c\
-			fdf_face.c\
-			fdf_edge.c\
+			fdf_faces.c\
+			fdf_edges.c\
+			fdf_draw1.c\
 			fdf_draw2.c\
 			fdf_keyevent.c\
 			fdf_tlst.c\
+			fdf_bresenham.c\
+			fdf_bresenham_2.c\
+
 
 SRC=		$(addprefix $(SRC_PATH)/,$(SRC_NAME))
 
@@ -38,8 +42,8 @@ CC=			gcc
 ##LDFLAGS=	-Llibft -Llibmat -L/usr/local/lib
 LDFLAGS=	-Llibft -Llibmat -L/usr/local/lib
 
-LIBS=		-lft -lmat -lmlx -lX11 -lXext -lm
-##LIBS=		-lft -lmat -lmlx -framework OpenGL -framework AppKit
+##LIBS=		-lft -lmat -lmlx -lX11 -lXext -lm
+LIBS=		-lft -lmat -lmlx -framework OpenGL -framework AppKit
 
 LDLIBS=		$(LDFLAGS) $(LIBS)
 

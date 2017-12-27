@@ -116,7 +116,7 @@ SRCS_LIST=	ft_printf.c\
 			ft_lstmap.c\
 			\
 			get_next_line.c\
-
+			ft_err.c\
 
 INC_LIST=	ft_printf.h\
 			libft.h\

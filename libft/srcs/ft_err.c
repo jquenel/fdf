@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf_draw.c                                         :+:      :+:    :+:   */
+/*   ft_err.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/22 11:24:06 by jquenel           #+#    #+#             */
-/*   Updated: 2017/12/22 12:44:54 by jquenel          ###   ########.fr       */
+/*   Created: 2017/12/26 14:45:55 by jquenel           #+#    #+#             */
+/*   Updated: 2017/12/26 15:00:00 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "libft.h"
+#include <stdarg.h>
+#include <stdlib.h>
 
-int			fdf_draw2(t_env *env)
+void		ft_err(int c, char *err_m, int ms, ...)
 {
-	t_node		*node;
-	int			dx;
-	int			dy;
+	void		*f;
+	va_list		ap;
 
-	dx = WIDTH / 2 - env->map->w;
-	dy = HEIGHT / 2 - env->map->h;
-	node = env->map->node;
-	while (node)
+	if (c)
 	{
-		mlx_pixel_put(MLX, WIN, node->v.x + dx, node->v.y + dy, 0x00FFFFFF);
-		//mlx_pixel_put(MLX, WIN, node->v.y + dy, node->v.x + dx, 0x00FFFFFF);
-		node = node->next;
+		va_start(ap, ms);
+		ft_putendl_fd(err_m, 2);
+		while (ms--)
+		{
+			f = va_arg(ap, void *);
+			free(f);
+		}
+		exit(0);
 	}
-	return (1);
 }
