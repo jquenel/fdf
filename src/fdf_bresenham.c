@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 07:53:20 by jquenel           #+#    #+#             */
-/*   Updated: 2017/12/27 21:13:18 by jquenel          ###   ########.fr       */
+/*   Updated: 2017/12/28 11:11:41 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,15 +107,14 @@ int		fdf_bresenham(t_v3d v1, t_v3d v2, t_env *env)
 	int		dx;
 	int		dz;
 
-	v1 = fdf_applymatrices(v1, env);
-	v2 = fdf_applymatrices(v2, env);
+	CAM(viewm) = fdf_loadmatrix(env);
+	if (!(fdf_applymatrices(&v1, env)) || !(fdf_applymatrices(&v2, env)))
+		return (0);
 	if (fdf_outofbounds(v1) && fdf_outofbounds(v2))
 		return (0);
-	dx = v2.x - v1.x;
-	dz = v2.z - v1.z;
-	if (dx > 0)
+	if ((dx = v2.x - v1.x) > 0)
 	{
-		if (dz > 0)
+		if ((dz = v2.z - v1.z) > 0)
 			return (dx >= dz ? bres1((int)v1.x, (int)v1.z, (int)v2.x,
 						(int)v2.z, env) :
 					bres2((int)v1.x, (int)v1.z, (int)v2.x, (int)v2.z, env));
@@ -123,7 +122,7 @@ int		fdf_bresenham(t_v3d v1, t_v3d v2, t_env *env)
 			return (dx >= -dz ? bres8((int)v1.x, (int)v1.z, (int)v2.x,
 	(int)v2.z, env) : bres7((int)v1.x, (int)v1.z, (int)v2.x, (int)v2.z, env));
 	}
-	else if (dz > 0)
+	else if ((dz = v2.z - v1.z) > 0)
 		return (-dx >= dz ? bres4((int)v1.x, (int)v1.z, (int)v2.x, (int)v2.z,
 				env) : bres3((int)v1.x, (int)v1.z, (int)v2.x, (int)v2.z, env));
 	else

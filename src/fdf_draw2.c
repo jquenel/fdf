@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 11:24:06 by jquenel           #+#    #+#             */
-/*   Updated: 2017/12/27 21:46:14 by jquenel          ###   ########.fr       */
+/*   Updated: 2017/12/28 11:00:23 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,6 @@
 
 
 #include <unistd.h>
-
-void		fdf_move(t_env *env)
-{
-	// can be changed to variable speed input. (e.g. CAM(angle.c) += xrot;)
-	if (env->keymap & FM_UP)
-		CAM(angle.x) += 0.01;
-	if (env->keymap & FM_DOWN)
-		CAM(angle.x) -= 0.01;
-	if (env->keymap & FM_A)
-		CAM(angle.y) += 0.01;
-	if (env->keymap & FM_D)
-		CAM(angle.y) -= 0.01;
-	if (env->keymap & FM_LEFT)
-		CAM(angle.z) += 0.01;
-	if (env->keymap & FM_RIGHT)
-		CAM(angle.z) -= 0.01;
-}
 
 void		fdf_addpixel(int x, int y, int color, t_env *env)
 {
@@ -51,20 +34,47 @@ void		fdf_addpixel(int x, int y, int color, t_env *env)
 	}
 }
 
-t_v3d		fdf_applymatrices(t_v3d v, t_env *env)
-{
-	v = ft_v3d_x_mx4(v, xrot_mx4(CAM(angle.x)));
-	v = ft_v3d_x_mx4(v, yrot_mx4(CAM(angle.y)));
-	v = ft_v3d_x_mx4(v, zrot_mx4(CAM(angle.z)));
-	v.x = v.x * ZOOM + WIDTH / 2;
-	v.z = v.z * ZOOM + HEIGHT / 2;
-	return (v);
-}
-
 t_bool			fdf_outofbounds(t_v3d v)
 {
 	return ((v.x < 0 || v.x >= WIDTH ||
 			v.z < 0 || v.z >= HEIGHT) ? TRUE : FALSE);
+}
+
+int			fdf_draw2(t_env *env)
+{
+	t_face		*face;
+	t_mx4		viewm;
+
+	mlx_clear_window(MLX, WIN);
+	viewm = fdf_loadmatrix(env);
+	fdf_move(env);
+	//printf("viewm : [00 : %.2lf] [01 : %.2lf] [02 : %.2lf] [03 : %.2lf]\n", viewm.mat[0][0],
+//	viewm.mat[0][1], viewm.mat[0][2], viewm.mat[0][3]);
+	face = env->map->face;
+	//
+	while (face)
+	{
+		/*t_v3d	v, w;
+		v.x = 100;
+		v.y = 100;
+		v.z = 100;
+		w.x = 200;
+		w.y = 100;
+		w.z = 80;
+		fdf_bresenham(v, w, env);*/
+		fdf_bresenham(face->edge->n1->v, face->edge->n2->v, env);
+		fdf_bresenham(face->edge->next->n1->v,
+				face->edge->next->n2->v, env);
+		fdf_bresenham(face->edge->next->next->n1->v,
+				face->edge->next->next->n2->v, env);
+		face = face->next;
+	}
+	mlx_put_image_to_window(MLX, WIN, IMG(ptr), 0, 0);
+	mlx_destroy_image(MLX, IMG(ptr));
+	IMG(ptr) = mlx_new_image(MLX, WIDTH, HEIGHT);
+	IMG(data) = mlx_get_data_addr(IMG(ptr), &(IMG(bpp)), &(IMG(lsize)), &(IMG(endian)));
+	sleep(0);
+	return (1);
 }
 
 void		read_face(t_env *env)
@@ -106,39 +116,4 @@ void		read_face(t_env *env)
 	}
 }
 
-int			fdf_draw2(t_env *env)
-{
-	t_face		*face;
-	t_mx4		viewm;
 
-	mlx_clear_window(MLX, WIN);
-	viewm = fdf_loadmatrix(env);
-	fdf_move(env);
-	//printf("viewm : [00 : %.2lf] [01 : %.2lf] [02 : %.2lf] [03 : %.2lf]\n", viewm.mat[0][0],
-//	viewm.mat[0][1], viewm.mat[0][2], viewm.mat[0][3]);
-	face = env->map->face;
-	//
-	while (face)
-	{
-		/*t_v3d	v, w;
-		v.x = 100;
-		v.y = 100;
-		v.z = 100;
-		w.x = 200;
-		w.y = 100;
-		w.z = 80;
-		fdf_bresenham(v, w, env);*/
-		fdf_bresenham(face->edge->n1->v, face->edge->n2->v, env);
-		fdf_bresenham(face->edge->next->n1->v,
-				face->edge->next->n2->v, env);
-		fdf_bresenham(face->edge->next->next->n1->v,
-				face->edge->next->next->n2->v, env);
-		face = face->next;
-	}
-	mlx_put_image_to_window(MLX, WIN, IMG(ptr), 0, 0);
-	mlx_destroy_image(MLX, IMG(ptr));
-	IMG(ptr) = mlx_new_image(MLX, WIDTH, HEIGHT);
-	IMG(data) = mlx_get_data_addr(IMG(ptr), &(IMG(bpp)), &(IMG(lsize)), &(IMG(endian)));
-	sleep(0);
-	return (1);
-}

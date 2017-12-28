@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/21 17:50:18 by jquenel           #+#    #+#             */
-/*   Updated: 2017/12/27 11:46:52 by jquenel          ###   ########.fr       */
+/*   Updated: 2017/12/28 10:58:57 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ typedef struct			s_cam
 {
 	t_v3d			pos;
 	t_v3d			angle;
-	t_v3d			focal;
+	t_mx4			viewm;
 	t_img			*img;
 	float			speed;
 }						t_cam;
@@ -127,6 +127,16 @@ typedef struct			s_tlist
 #  define FK_A		0x0
 #  define FK_S		0x1
 #  define FK_D		0x2
+#  define FK_N0		0x52
+#  define FK_N1		0x53
+#  define FK_N2		0x54
+#  define FK_N3		0x55
+#  define FK_N4		0x56
+#  define FK_N5		0x57
+#  define FK_N6		0x58
+#  define FK_N7		0x59
+#  define FK_N8		0x5b
+#  define FK_N9		0x5c
 
 # endif
 
@@ -142,6 +152,16 @@ typedef struct			s_tlist
 #  define FM_A		(1L << 6)
 #  define FM_S		(1L << 7)
 #  define FM_D		(1L << 8)
+#  define FM_N0		(1L << 9)
+#  define FM_N1		(1L << 10)
+#  define FM_N2		(1L << 11)
+#  define FM_N3		(1L << 12)
+#  define FM_N4		(1L << 13)
+#  define FM_N5		(1L << 14)
+#  define FM_N6		(1L << 15)
+#  define FM_N7		(1L << 16)
+#  define FM_N8		(1L << 17)
+#  define FM_N9		(1L << 18)
 
 # endif
 

@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/20 15:01:03 by jquenel           #+#    #+#             */
-/*   Updated: 2017/12/27 20:01:37 by jquenel          ###   ########.fr       */
+/*   Updated: 2017/12/28 00:19:26 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@
 # define CAM_START_Z	0
 # define CAM_START_RX	0
 # define CAM_START_RY	0
-# define CAM_START_RZ	M_PI / 6
+# define CAM_START_RZ	0
+# define CAM_START_SPD	0.1
 
 void		fdf_init_env(t_env **env);
 void		fdf_parser(t_env *env, char *arg);
@@ -49,7 +50,7 @@ int			fdf_draw2(t_env *env);
 void		fdf_addpixel(int x, int y, int c, t_env *env);
 void		fdf_move(t_env *env);
 t_mx4		fdf_loadmatrix(t_env *env);
-t_v3d		fdf_applymatrices(t_v3d v, t_env *env);
+int			fdf_applymatrices(t_v3d *v, t_env *env);
 t_bool		fdf_outofbounds(t_v3d v);
 
 void		fdf_addnode(t_node **node1, t_node *node2);
