@@ -1,41 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf_edges.c                                        :+:      :+:    :+:   */
+/*   fdf_zsort.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/28 23:40:44 by jquenel           #+#    #+#             */
-/*   Updated: 2017/12/28 23:40:45 by jquenel          ###   ########.fr       */
+/*   Created: 2017/12/29 01:21:19 by jquenel           #+#    #+#             */
+/*   Updated: 2017/12/29 01:25:10 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdlib.h>
 
-t_edge			*fdf_newedge(t_node *n1, t_node *n2)
+void			fdf_zsort(t_env *env)
 {
-	t_edge		*edge;
-
-	//checkerror
-	edge = malloc(sizeof(t_edge));
-	edge->n1 = n1;
-	edge->n2 = n2;
-	edge->next = NULL;
-	return (edge);
+	(void)env;
 }
 
-void			fdf_addedge(t_edge **edge1, t_edge *edge2)
+void			fdf_zsortfaces(t_env *env)
 {
-	t_edge	*tmp;
-
-	if (!(*edge1))
-		*edge1 = edge2;
-	else
-	{
-		tmp = *edge1;
-		while (tmp->next)
-			tmp = tmp->next;
-		tmp->next = edge2;
-	}
+	(void)env;
 }

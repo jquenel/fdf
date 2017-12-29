@@ -6,26 +6,13 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 10:19:47 by jquenel           #+#    #+#             */
-/*   Updated: 2017/12/27 21:46:48 by jquenel          ###   ########.fr       */
+/*   Updated: 2017/12/29 14:04:13 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include <fcntl.h>
 #include <stdlib.h>
-
-/*
-**		NA-----NB
-**		|      |
-**		|      |
-**		|      |
-**		ND-----NC
-*/
-
-#define NA		(MAP(nlist)[i])
-#define NB		(MAP(nlist)[i + 1])
-#define	NC		(MAP(nlist)[i + MAP(h) + 1])
-#define ND		(MAP(nlist)[i + MAP(h)])
 
 static void			fdf_filechecker(t_tlist *tabs)
 {
@@ -54,60 +41,11 @@ void				fdf_get_nlist(t_env *env)
 	}
 }
 
-void				fdf_facebuilder(t_env *env)
-{
-	t_node	*tmp;
-	int		i;
-	int		node_count;
-
-	tmp = env->map->node;
-	printf("getting nlist...");
-	fdf_get_nlist(env);
-	printf("OK\n");
-	while (tmp)
-	{
-		tmp->v.x -= env->map->w / 2;
-		tmp->v.y -= env->map->h / 2;
-		tmp->v.z /= ZOOM / 2;
-		//zoom adjustment to fix//
-		tmp = tmp->next;
-	}
-	i = 0;
-	printf("getting nodecount...");
-	node_count = fdf_nodecount(env);
-	printf("OK\n");
-	printf("building faces...");
-	while (NA && NB && ND && NC && i + MAP(h) < node_count)
-	{
-		if ((i + 1) % MAP(h))
-		{
-			if ((ABS(NA->v.z - NC->v.z)) > (ABS(NB->v.z - ND->v.z)))
-			{
-				fdf_addface(&MAP(face), fdf_newface(NA, NB, ND));
-				fdf_addface(&MAP(face), fdf_newface(NB, NC, ND));
-			//if (MAP(face))
-			//	printf("added face\n");
-			}
-			else
-			{
-				fdf_addface(&MAP(face), fdf_newface(NA, NB, NC));
-				fdf_addface(&MAP(face), fdf_newface(NA, NC, ND));
-			//if (MAP(face))
-			//	printf("added face\n");
-			}
-		}
-		i++;
-	}
-	//read_face(env);
-	printf("OK\n");
-}
-
 void				fdfer(t_env *env, int fd)
 {
 	t_tlist		*tabs;
 	char		*line;
 	int			i;
-	int			j;
 
 	//ft_errcheck
 	tabs = NULL;
@@ -115,22 +53,18 @@ void				fdfer(t_env *env, int fd)
 		fdf_tlstpushback(&tabs, fdf_tlstnew(ft_strsplit(line, ' ')));
 	free(line);
 	fdf_filechecker(tabs);
-	i = 0;
-	j = 0;
+	MAP(w) = 0;
 	while (tabs)
 	{
-		j = -1;
-		while ((tabs->tab)[++j])
-			fdf_addnode(&(env->map->node), fdf_newnode(ft_v3d_new(i, j,
-						ft_atoi((tabs->tab)[j]))));
+		MAP(h) = -1;
+		while ((tabs->tab)[++MAP(h)])
+			fdf_addnode(&(env->map->node),
+		fdf_newnode(ft_v3d_new(MAP(w), MAP(h), ft_atoi((tabs->tab)[MAP(h)]))));
 		tabs = tabs->next;
-		i++;
+		MAP(w)++;
 	}
-	env->map->w = i;
-	env->map->h = j;
-	printf("finished parsing the nodes, building faces...\n");
 	fdf_facebuilder(env);
-	printf("finished building faces...\n");
+	CAM(pos.y) += MAX(MAP(w), MAP(h));
 }
 
 void				fdf_parser(t_env *env, char *arg)

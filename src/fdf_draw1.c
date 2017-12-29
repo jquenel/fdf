@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 11:24:06 by jquenel           #+#    #+#             */
-/*   Updated: 2017/12/27 11:53:15 by jquenel          ###   ########.fr       */
+/*   Updated: 2017/12/28 23:42:54 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void		fdfractol(t_env *env, char *arg)
 	(void)arg;
 }
 
-int			fdf_draw1(t_env *env)
+int			fdf_draw_fractol(t_env *env)
 {
 	(void)env;
 	printf("Hello draw1\n");

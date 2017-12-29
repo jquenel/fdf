@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 11:15:40 by jquenel           #+#    #+#             */
-/*   Updated: 2017/12/26 16:13:56 by jquenel          ###   ########.fr       */
+/*   Updated: 2017/12/29 14:06:56 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,32 @@ void		fdf_addnode(t_node	**node1, t_node *node2)
 			tmp = tmp->next;
 		tmp->next = node2;
 		node2->prev = tmp;
+	}
+}
+
+void		fdf_loadsave(t_env *env)
+{
+	t_node	*tmp;
+	t_node	*save;
+
+	tmp = MAP(node);
+	save = MAP(save);
+	while (tmp && save)
+	{
+		tmp->v = save->v;
+		tmp = tmp->next;
+		save = save->next;
+	}
+}
+
+void		fdf_savepoint(t_env *env)
+{
+	t_node	*tmp;
+
+	tmp = MAP(node);
+	while (tmp)
+	{
+		fdf_addnode(&MAP(save), fdf_newnode(tmp->v));
+		tmp = tmp->next;
 	}
 }

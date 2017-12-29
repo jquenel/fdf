@@ -14,8 +14,10 @@ SRC_NAME=	main.c\
 			fdf_init.c\
 			fdf_parser.c\
 			fdf_loadmatrix.c\
+			fdf_zsort.c\
 			fdf_nodes.c\
 			fdf_faces.c\
+			fdf_facebuilder.c\
 			fdf_edges.c\
 			fdf_draw1.c\
 			fdf_draw2.c\

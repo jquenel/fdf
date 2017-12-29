@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fdf_faces.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/12/28 23:37:43 by jquenel           #+#    #+#             */
+/*   Updated: 2017/12/29 00:01:19 by jquenel          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 #include <stdlib.h>
 
@@ -24,7 +36,7 @@ void			fdf_fton(t_face *f, t_node *n)
 	i = 0;
 	while ((n->face)[i])
 		i++;
-	(n->face)[i] = f;
+		(n->face)[i] = f;
 }
 
 t_face			*fdf_newface(t_node *a, t_node *b, t_node *c)
@@ -46,3 +58,4 @@ t_face			*fdf_newface(t_node *a, t_node *b, t_node *c)
 	fdf_fton(face, c);
 	return (face);
 }
+

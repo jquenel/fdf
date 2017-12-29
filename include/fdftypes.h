@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/21 17:50:18 by jquenel           #+#    #+#             */
-/*   Updated: 2017/12/28 10:58:57 by jquenel          ###   ########.fr       */
+/*   Updated: 2017/12/29 14:02:37 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ typedef struct			s_map
 	int				w;
 	int				h;
 	t_node			*node;
+	t_node			*save;
 	t_node			**nlist;
 	t_face			*face;
 }						t_map;
@@ -97,6 +98,8 @@ typedef struct			s_cam
 	t_mx4			viewm;
 	t_img			*img;
 	float			speed;
+	float			yratio;
+	int				mode;
 }						t_cam;
 
 typedef struct			s_env
@@ -137,6 +140,8 @@ typedef struct			s_tlist
 #  define FK_N7		0x59
 #  define FK_N8		0x5b
 #  define FK_N9		0x5c
+#  define FK_NPLUS	0x45
+#  define FK_NMINUS	0x4e
 
 # endif
 
@@ -162,6 +167,8 @@ typedef struct			s_tlist
 #  define FM_N7		(1L << 16)
 #  define FM_N8		(1L << 17)
 #  define FM_N9		(1L << 18)
+#  define FM_NPLUS	(1L << 19)
+#  define FM_NMINUS	(1L << 20)
 
 # endif
 
