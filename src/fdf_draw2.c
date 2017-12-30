@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 11:24:06 by jquenel           #+#    #+#             */
-/*   Updated: 2017/12/29 16:07:28 by jquenel          ###   ########.fr       */
+/*   Updated: 2017/12/29 19:20:03 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int			fdf_draw_fdf(t_env *env)
 	viewm = fdf_loadmatrix(env);
 	fdf_move(env);
 	if (CAM(mode) == 1)
-		fdf_zsort(env);
+		return (fdf_draw_hlr(env));
 	face = env->map->face;
 	//
 	while (face)
@@ -63,10 +63,6 @@ int			fdf_draw_fdf(t_env *env)
 	}
 	mlx_put_image_to_window(MLX, WIN, IMG(ptr), 0, 0);
 	ft_bzero(IMG(data), WIDTH * HEIGHT * 4);
-	//mlx_destroy_image(MLX, IMG(ptr));
-	//IMG(ptr) = mlx_new_image(MLX, WIDTH, HEIGHT);
-	//IMG(data) = mlx_get_data_addr(IMG(ptr), &(IMG(bpp)), &(IMG(lsize)), &(IMG(endian)));
-	sleep(0);
 	return (1);
 }
 

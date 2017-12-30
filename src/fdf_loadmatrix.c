@@ -38,10 +38,10 @@ void		fdf_move(t_env *env)
 int			fdf_applymatrices(t_v3d *v, t_env *env)
 {
 	*v = ft_v3d_x_mx4(*v, CAM(viewm));
-	if (v->y > 40 + CAM(pos.y) || v->y <= 0.1)
-		return (0);
 	if (v->y == 0)
-		return (0);
+		v->y--;
+//	if (v->y > 40 + CAM(pos.y) || v->y <= 0.1)
+//		return (0);
 	//find a way to put this into matrices
 	v->x = v->x * CAM(yratio) * CAM(yratio) / v->y + WIDTH / 2;
 	v->z = v->z * CAM(yratio) * CAM(yratio) / v->y + HEIGHT / 2;

@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 23:59:52 by jquenel           #+#    #+#             */
-/*   Updated: 2017/12/29 14:14:02 by jquenel          ###   ########.fr       */
+/*   Updated: 2017/12/29 17:51:03 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ void				fdf_facebuilder(t_env *env)
 		//zoom adjustment to fix//
 		tmp = tmp->next;
 	}
-	fdf_savepoint(env);
 	i = 0;
 	node_count = fdf_nodecount(env);
 	ft_printf("building faces");
@@ -86,5 +85,6 @@ void				fdf_facebuilder(t_env *env)
 		ft_printf(i++ % 100 ? "." : "");
 	}
 	//read_face(env);
+	fdf_zsortfaces(env);
 	ft_printf("\nOK\n");
 }

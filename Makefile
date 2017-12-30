@@ -21,6 +21,8 @@ SRC_NAME=	main.c\
 			fdf_edges.c\
 			fdf_draw1.c\
 			fdf_draw2.c\
+			fdf_hlr.c\
+			fdf_raster.c\
 			fdf_keyevent.c\
 			fdf_tlst.c\
 			fdf_bresenham.c\

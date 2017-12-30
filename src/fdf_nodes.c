@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 11:15:40 by jquenel           #+#    #+#             */
-/*   Updated: 2017/12/29 14:06:56 by jquenel          ###   ########.fr       */
+/*   Updated: 2017/12/29 16:26:44 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,29 +61,10 @@ void		fdf_addnode(t_node	**node1, t_node *node2)
 	}
 }
 
-void		fdf_loadsave(t_env *env)
+void		fdf_reinitcam(t_env *env)
 {
-	t_node	*tmp;
-	t_node	*save;
-
-	tmp = MAP(node);
-	save = MAP(save);
-	while (tmp && save)
-	{
-		tmp->v = save->v;
-		tmp = tmp->next;
-		save = save->next;
-	}
-}
-
-void		fdf_savepoint(t_env *env)
-{
-	t_node	*tmp;
-
-	tmp = MAP(node);
-	while (tmp)
-	{
-		fdf_addnode(&MAP(save), fdf_newnode(tmp->v));
-		tmp = tmp->next;
-	}
+	CAM(pos) = ft_v3d_new(CAM_START_X, CAM_START_Y, CAM_START_Z);
+	CAM(angle) = ft_v3d_new(CAM_START_RX, CAM_START_RY, CAM_START_RZ);
+	CAM(speed) = CAM_START_SPD;
+	CAM(yratio) = ZOOM;
 }

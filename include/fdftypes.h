@@ -6,14 +6,13 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/21 17:50:18 by jquenel           #+#    #+#             */
-/*   Updated: 2017/12/29 14:02:37 by jquenel          ###   ########.fr       */
+/*   Updated: 2017/12/30 01:34:46 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDFTYPES_H
 # define FDFTYPES_H
 
-# include "fdf.h"
 # include "libmat.h"
 # include <inttypes.h>
 
@@ -23,8 +22,20 @@
 # define CAM(x)		(env->cam->x)
 # define IMG(x)		(CAM(img)->x)
 # define MAP(x)		(env->map->x)
-# define MAX_NFACE	16
 
+# define MAX_NFACE		16
+# define WIDTH			800
+# define HEIGHT			600
+# define ZOOM			20
+# define CAM_START_X	0
+# define CAM_START_Y	20
+# define CAM_START_Z	0
+# define CAM_START_RX	M_PI / -3
+# define CAM_START_RY	0
+# define CAM_START_RZ	M_PI / -2
+# define CAM_START_SPD	0.1
+# define CAM_MODE		0
+# define R_TOLERANCE	20
 
 # ifndef ERR_CODES
 #  define ERR_CODES
@@ -50,6 +61,7 @@ typedef struct			s_edge
 {
 	struct s_node	*n1;
 	struct s_node	*n2;
+	float			det;
 	struct s_edge	*next;
 }						t_edge;
 
@@ -59,6 +71,7 @@ typedef struct			s_face
 	struct s_node	*a;
 	struct s_node	*b;
 	struct s_node	*c;
+	float			depth;
 	struct s_face	*next;
 	struct s_face	*prev;
 }						t_face;
@@ -67,6 +80,7 @@ typedef struct			s_node
 {
 	t_v3d			v;
 	t_face			*face[MAX_NFACE];
+	float			height;
 	struct s_node	*next;
 	struct s_node	*prev;
 }						t_node;
@@ -76,6 +90,7 @@ typedef struct			s_map
 	int				type;
 	int				w;
 	int				h;
+	int				*zmap;
 	t_node			*node;
 	t_node			*save;
 	t_node			**nlist;

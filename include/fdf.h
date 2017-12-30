@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/20 15:01:03 by jquenel           #+#    #+#             */
-/*   Updated: 2017/12/29 16:08:32 by jquenel          ###   ########.fr       */
+/*   Updated: 2017/12/29 21:57:50 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,6 @@
 
 #include <stdio.h>
 
-# define WIDTH			800
-# define HEIGHT			600
-# define ZOOM			20
-# define CAM_START_X	0
-# define CAM_START_Y	20
-# define CAM_START_Z	0
-# define CAM_START_RX	M_PI / -3
-# define CAM_START_RY	0
-# define CAM_START_RZ	M_PI / -2
-# define CAM_START_SPD	0.1
-
 void		fdf_init_env(t_env **env);
 void		fdf_parser(t_env *env, char *arg);
 void		fdfer(t_env *env, int fd);
@@ -46,9 +35,13 @@ void		fdfractol(t_env *env, char *arg);
 int			fdf_keypressed(int keycode, t_env *env);
 int			fdf_keyreleased(int keycode, t_env *env);
 void		fdf_move(t_env *env);
+void		fdf_reinitcam(t_env *env);
 
 int			fdf_draw_fractol(t_env *env);
 int			fdf_draw_fdf(t_env *env);
+int			fdf_draw_hlr(t_env *env);
+void		fdf_raster(t_node a, t_node b, t_node c, t_env *env);
+float		fdf_orient2d(t_v3d a, t_v3d b, t_v3d c);
 void		fdf_addpixel(int x, int y, int c, t_env *env);
 
 t_mx4		fdf_loadmatrix(t_env *env);
@@ -62,8 +55,6 @@ void		fdf_addnode(t_node **node1, t_node *node2);
 t_node		*fdf_newnode(t_v3d v);
 int			fdf_nodecount(t_env *env);
 void		fdf_get_nlist(t_env *env);
-void		fdf_savepoint(t_env *env);
-void		fdf_loadsave(t_env *env);
 
 void		fdf_addface(t_face **face1, t_face *face2);
 t_face		*fdf_newface(t_node *a, t_node *b, t_node *c);
