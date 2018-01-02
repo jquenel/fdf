@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_v3d_x_v3d.c                                     :+:      :+:    :+:   */
+/*   fdf_rotxyz.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/21 16:16:51 by jquenel           #+#    #+#             */
-/*   Updated: 2017/12/31 22:27:38 by jquenel          ###   ########.fr       */
+/*   Created: 2017/12/30 16:06:35 by jquenel           #+#    #+#             */
+/*   Updated: 2017/12/30 19:41:16 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libmat.h"
+#include "fdf.h"
 
-t_v3d		ft_v3d_x_v3d(t_v3d const v1, t_v3d const v2)
+t_mx4		fdf_rot(t_v3d pos, double t, t_mx4 (*f)(double))
 {
-	t_v3d	v;
+	t_v3d	dpos;
 
-	v.x = v1.y * v2.z - v1.z * v2.y;
-	v.y = v1.z * v2.x - v1.x * v2.z;
-	v.z = v1.x * v2.y - v1.y * v2.x;
-	return (v);
+	dpos = ft_v3d_new(-pos.x, -pos.y, -pos.z);
+	return (ft_mx4_x_mx4(
+			ft_mx4_x_mx4(ft_mx4_change(pos), (*f)(t)),
+			ft_mx4_change(dpos)));
 }

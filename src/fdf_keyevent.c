@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/26 15:29:45 by jquenel           #+#    #+#             */
-/*   Updated: 2017/12/28 20:13:45 by jquenel          ###   ########.fr       */
+/*   Updated: 2017/12/31 14:45:18 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,15 @@ int			fdf_keypressed2(int keycode, t_env *env)
 		return (env->keymap |= FM_NPLUS);
 	if (keycode == FK_NMINUS)
 		return (env->keymap |= FM_NMINUS);
+	if (keycode == FK_T)
+		return (CAM(mode) = CAM(mode) ? 0 : 1);
+	if (keycode == FK_ESC)
+		exit(0);
 	return (0);
 }
 
 int			fdf_keypressed(int keycode, t_env *env)
 {
-	if (keycode == FK_ESC)
-		exit(0);
 	if (keycode == FK_UP || keycode == FK_N5)
 		return (env->keymap |= FM_UP);
 	if (keycode == FK_DOWN || keycode == FK_N2)

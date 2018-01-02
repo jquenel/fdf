@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 11:15:40 by jquenel           #+#    #+#             */
-/*   Updated: 2017/12/29 16:26:44 by jquenel          ###   ########.fr       */
+/*   Updated: 2017/12/31 14:41:15 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,8 @@ t_node		*fdf_newnode(t_v3d v)
 	int			i;
 
 	ft_err(!(n = (t_node *)malloc(sizeof(t_node))), ERR_M, 0);
-	n->v.x = v.x;
-	n->v.y = v.y;
-	n->v.z = v.z;
+	n->v = ft_v3d_new(v.x, v.y, v.z);
+	n->dv = ft_v3d_new(v.x, v.y, v.z);
 	n->next = NULL;
 	n->prev = NULL;
 	i = -1;

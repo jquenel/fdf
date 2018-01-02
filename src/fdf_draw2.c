@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 11:24:06 by jquenel           #+#    #+#             */
-/*   Updated: 2017/12/29 19:20:03 by jquenel          ###   ########.fr       */
+/*   Updated: 2017/12/31 16:56:23 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,15 @@ void		fdf_addpixel(int x, int y, int color, t_env *env)
 
 	if (x < 0 || y < 0 || x >= WIDTH || y >= HEIGHT)
 		return ;
+	if (MAP(zmap)[x + y * WIDTH])
+		return ;
+	//printf("%d\n", MAP(zmap)[x + y * WIDTH]);
 	c.i = color;
-	pos = x * 4 + y * WIDTH * 4;
-	//printf("[%+5d]   { %+3d : %+3d }\n", pos, x, y);
-	if (pos >= 0 && pos <= WIDTH * HEIGHT * 4 - 4)
+	pos = x + y * WIDTH;
+	if (pos >= 0 && pos < WIDTH * HEIGHT)
 	{
-		IMG(data)[pos] = c.c[3];
-		IMG(data)[pos + 1] = c.c[2];
-		IMG(data)[pos + 2] = c.c[1];
-		IMG(data)[pos + 3] = c.c[0];
+		((int *)IMG(data))[pos] = c.i;
+		MAP(zmap)[pos] = 1;
 	}
 }
 
@@ -43,26 +43,26 @@ t_bool			fdf_outofbounds(t_v3d v)
 int			fdf_draw_fdf(t_env *env)
 {
 	t_face		*face;
-	t_mx4		viewm;
 
 	mlx_clear_window(MLX, WIN);
-	viewm = fdf_loadmatrix(env);
+	CAM(viewm) = fdf_loadmatrix(env);
+	fdf_applymatrices(env);
 	fdf_move(env);
+	bzero(MAP(zmap), WIDTH * HEIGHT * sizeof(int));
+	ft_bzero(IMG(data), WIDTH * HEIGHT * 4);
 	if (CAM(mode) == 1)
 		return (fdf_draw_hlr(env));
 	face = env->map->face;
-	//
 	while (face)
 	{
-		fdf_bresenham(face->edge->n1->v, face->edge->n2->v, env);
-		fdf_bresenham(face->edge->next->n1->v,
-				face->edge->next->n2->v, env);
-		fdf_bresenham(face->edge->next->next->n1->v,
-				face->edge->next->next->n2->v, env);
+		fdf_bresenham(face->edge->n1->dv, face->edge->n2->dv, env);
+		fdf_bresenham(face->edge->next->n1->dv,
+				face->edge->next->n2->dv, env);
+		fdf_bresenham(face->edge->next->next->n1->dv,
+				face->edge->next->next->n2->dv, env);
 		face = face->next;
 	}
 	mlx_put_image_to_window(MLX, WIN, IMG(ptr), 0, 0);
-	ft_bzero(IMG(data), WIDTH * HEIGHT * 4);
 	return (1);
 }
 
@@ -104,5 +104,3 @@ void		read_face(t_env *env)
 		i++;
 	}
 }
-
-

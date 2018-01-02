@@ -35,20 +35,35 @@ void		fdf_move(t_env *env)
 	fdf_sets(env);
 }
 
-int			fdf_applymatrices(t_v3d *v, t_env *env)
+int			fdf_applymatrices(t_env *env)
 {
-	*v = ft_v3d_x_mx4(*v, CAM(viewm));
-	if (v->y == 0)
-		v->y--;
-//	if (v->y > 40 + CAM(pos.y) || v->y <= 0.1)
-//		return (0);
+	//ici du multithread possible
+	t_node		*n;
+	n = MAP(node);
+	while (n)
+	{
+		n->dv = ft_v3d_new(n->v.x, n->v.y, n->v.z);
+		n->dv = ft_v3d_x_mx4(n->dv, CAM(viewm));
+		if (n->dv.y == 0)
+			n->dv.y += 0.1;
+		n = n->next;
+	}
+	//if (CAM(mode))
+	//	fdf_zsortfaces(env);
+	n = MAP(node);
+	while (n)
+	{
 	//find a way to put this into matrices
-	v->x = v->x * CAM(yratio) * CAM(yratio) / v->y + WIDTH / 2;
-	v->z = v->z * CAM(yratio) * CAM(yratio) / v->y + HEIGHT / 2;
+		//n->dv.x = n->dv.x * CAM(yratio) * 3+ WIDTH / 2;
+		//n->dv.z = n->dv.z * CAM(yratio) * 3 + HEIGHT / 2;
+		n->dv.x = n->dv.x * CAM(yratio) * CAM(yratio) / n->dv.y + WIDTH / 2;
+		n->dv.z = n->dv.z * CAM(yratio) * CAM(yratio) / n->dv.y + HEIGHT / 2;
+		n = n->next;
+	}
 	return (1);
 }
 
 t_mx4		fdf_loadmatrix(t_env *env)
 {
-	return (ft_mx4_x_mx4(ft_mx4_transl(CAM(pos)), ft_mx4_rot(CAM(angle))));
+	return (ft_mx4_x_mx4(ft_mx4_change(CAM(pos)), ft_mx4_rot(CAM(angle))));
 }

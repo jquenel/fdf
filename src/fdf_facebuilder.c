@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 23:59:52 by jquenel           #+#    #+#             */
-/*   Updated: 2017/12/29 17:51:03 by jquenel          ###   ########.fr       */
+/*   Updated: 2017/12/31 17:08:44 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void				fdf_facebuilder(t_env *env)
 	{
 		tmp->v.x -= env->map->w / 2;
 		tmp->v.y -= env->map->h / 2;
-		tmp->v.z /= CAM(yratio) / -4;
+		tmp->v.z /= CAM(yratio) / -8;
 		//zoom adjustment to fix//
 		tmp = tmp->next;
 	}
@@ -85,6 +85,6 @@ void				fdf_facebuilder(t_env *env)
 		ft_printf(i++ % 100 ? "." : "");
 	}
 	//read_face(env);
-	fdf_zsortfaces(env);
+//	fdf_zsortfaces(env);
 	ft_printf("\nOK\n");
 }

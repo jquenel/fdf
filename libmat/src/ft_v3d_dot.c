@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_v3d_x_v3d.c                                     :+:      :+:    :+:   */
+/*   ft_v3d_dot.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/21 16:16:51 by jquenel           #+#    #+#             */
-/*   Updated: 2017/12/31 22:27:38 by jquenel          ###   ########.fr       */
+/*   Created: 2017/12/31 22:43:49 by jquenel           #+#    #+#             */
+/*   Updated: 2017/12/31 22:47:47 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libmat.h"
 
-t_v3d		ft_v3d_x_v3d(t_v3d const v1, t_v3d const v2)
+float		ft_v3d_dot(t_v3d const v1, t_v3d const v2)
 {
-	t_v3d	v;
-
-	v.x = v1.y * v2.z - v1.z * v2.y;
-	v.y = v1.z * v2.x - v1.x * v2.z;
-	v.z = v1.x * v2.y - v1.y * v2.x;
-	return (v);
+	return (v1.x * v2.x + v1.y * v2.y + v1.z * v2.z);
 }

@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 10:00:01 by jquenel           #+#    #+#             */
-/*   Updated: 2017/12/30 01:14:56 by jquenel          ###   ########.fr       */
+/*   Updated: 2017/12/31 16:05:41 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void		fdf_init_camera(t_env *env)
 void		fdf_init_map(t_env *env)
 {
 	ft_err(!(env->map = malloc(sizeof(t_map))), ERR_M, 0);
-	ft_err(!(env->map->zmap = malloc(sizeof(int) * WIDTH * HEIGHT)), ERR_M, 0);
+//	ft_err(!(env->map->zmap = malloc(sizeof(int) * WIDTH * HEIGHT)), ERR_M, 0);
 	ft_bzero(MAP(zmap), WIDTH * HEIGHT * sizeof(int));
 	MAP(type) = 0;
 	MAP(w) = 0;

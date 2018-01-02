@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/21 17:50:18 by jquenel           #+#    #+#             */
-/*   Updated: 2017/12/30 01:34:46 by jquenel          ###   ########.fr       */
+/*   Updated: 2017/12/31 17:03:31 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 # define MAP(x)		(env->map->x)
 
 # define MAX_NFACE		16
-# define WIDTH			800
-# define HEIGHT			600
+# define WIDTH			1600
+# define HEIGHT			1000
 # define ZOOM			20
 # define CAM_START_X	0
 # define CAM_START_Y	20
@@ -79,6 +79,7 @@ typedef struct			s_face
 typedef struct			s_node
 {
 	t_v3d			v;
+	t_v3d			dv;
 	t_face			*face[MAX_NFACE];
 	float			height;
 	struct s_node	*next;
@@ -90,7 +91,7 @@ typedef struct			s_map
 	int				type;
 	int				w;
 	int				h;
-	int				*zmap;
+	int				zmap[WIDTH * HEIGHT];
 	t_node			*node;
 	t_node			*save;
 	t_node			**nlist;
@@ -115,6 +116,7 @@ typedef struct			s_cam
 	float			speed;
 	float			yratio;
 	int				mode;
+	int				color;
 }						t_cam;
 
 typedef struct			s_env
@@ -145,6 +147,7 @@ typedef struct			s_tlist
 #  define FK_A		0x0
 #  define FK_S		0x1
 #  define FK_D		0x2
+#  define FK_T		0x11
 #  define FK_N0		0x52
 #  define FK_N1		0x53
 #  define FK_N2		0x54
@@ -163,7 +166,6 @@ typedef struct			s_tlist
 # ifndef FDF_KEYMAP
 #  define FDF_KEYMAP
 
-#  define FM_ESC	(1L)
 #  define FM_UP		(1L << 1)
 #  define FM_DOWN	(1L << 2)
 #  define FM_LEFT	(1L << 3)
@@ -172,6 +174,7 @@ typedef struct			s_tlist
 #  define FM_A		(1L << 6)
 #  define FM_S		(1L << 7)
 #  define FM_D		(1L << 8)
+#  define FM_T		(1L << 21)
 #  define FM_N0		(1L << 9)
 #  define FM_N1		(1L << 10)
 #  define FM_N2		(1L << 11)
@@ -190,15 +193,16 @@ typedef struct			s_tlist
 # ifndef FDF_COLORS
 #  define FDF_COLORS
 
-#  define C_WHITE		0xffffff00
+#  define C_WHITE		0x00ffffff
 #  define C_RED			0xff000000
 #  define C_GREEN		0x00ff0000
 #  define C_BLUE		0x0000ff00
+#  define C_BLACK		0x0
 
 typedef union			u_color
 {
-	int32_t		i;
-	char		c[4];
+	int32_t			i;
+	unsigned char	c[4];
 }						t_color;
 
 # endif

@@ -11,6 +11,7 @@ SRC_LIST=	ft_v3d_add.c\
 			ft_v3d_new.c\
 			ft_v3d_mag.c\
 			ft_v3d_dir.c\
+			ft_v3d_dot.c\
 			ft_v3d_norm.c\
 			ft_v3d_copy.c\
 			ft_v3d_x_v3d.c\
@@ -18,6 +19,7 @@ SRC_LIST=	ft_v3d_add.c\
 			ft_mx4_x_mx4.c\
 			ft_mx4_rot.c\
 			ft_mx4_transl.c\
+			ft_mx4_change.c\
 
 INC_LIST=	libmat.h\
 
@@ -29,7 +31,7 @@ TMP_OBJ=	$(SRC_LIST:%.c=%.o)
 
 INC=		$(INC_LIST:%=$(H_PATH)%)
 
-CFLAGS=		-Wextra -Wall -O3 -lm
+CFLAGS=		-Wextra -Wall -O3
 
 CC=			gcc
 

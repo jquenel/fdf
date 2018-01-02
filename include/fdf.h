@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/20 15:01:03 by jquenel           #+#    #+#             */
-/*   Updated: 2017/12/29 21:57:50 by jquenel          ###   ########.fr       */
+/*   Updated: 2017/12/31 14:19:20 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,13 @@ void		fdf_reinitcam(t_env *env);
 int			fdf_draw_fractol(t_env *env);
 int			fdf_draw_fdf(t_env *env);
 int			fdf_draw_hlr(t_env *env);
-void		fdf_raster(t_node a, t_node b, t_node c, t_env *env);
+void		fdf_raster(t_node *a, t_node *b, t_node *c, t_env *env);
 float		fdf_orient2d(t_v3d a, t_v3d b, t_v3d c);
 void		fdf_addpixel(int x, int y, int c, t_env *env);
 
 t_mx4		fdf_loadmatrix(t_env *env);
-int			fdf_applymatrices(t_v3d *v, t_env *env);
+int			fdf_applymatrices(t_env *env);
+t_mx4		fdf_rot(t_v3d pos, double t, t_mx4 (*f)(double));
 t_bool		fdf_outofbounds(t_v3d v);
 
 void		fdf_zsort(t_env *env);
@@ -68,6 +69,7 @@ t_tlist		*fdf_tlstnew(char **tab);
 void		fdf_tlstpushback(t_tlist **begin_list, t_tlist *list);
 
 int			fdf_bresenham(t_v3d v1, t_v3d v2, t_env *env);
+int			fdf_bres_limits(t_v3d a, t_v3d b, t_env *env);
 int			bres1(int x1, int y1, int x2, int y2, t_env *env);
 int			bres2(int x1, int y1, int x2, int y2, t_env *env);
 int			bres3(int x1, int y1, int x2, int y2, t_env *env);

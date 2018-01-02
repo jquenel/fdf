@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 07:53:20 by jquenel           #+#    #+#             */
-/*   Updated: 2017/12/29 18:06:59 by jquenel          ###   ########.fr       */
+/*   Updated: 2017/12/31 16:54:59 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		bres1(int x1, int y1, int x2, int y2, t_env *env)
 	dy = (y2 - y1) * 2;
 	while (x1 <= x2)
 	{
-		fdf_addpixel(x1, y1, C_WHITE, env);
+		fdf_addpixel(x1, y1, CAM(color), env);
 		x1++;
 		if ((e -= dy) < 0)
 		{
@@ -45,7 +45,7 @@ int		bres2(int x1, int y1, int x2, int y2, t_env *env)
 	dy = e * 2;
 	while (y1 <= y2)
 	{
-		fdf_addpixel(x1, y1, C_WHITE, env);
+		fdf_addpixel(x1, y1, CAM(color), env);
 		y1++;
 		if ((e -= dx) < 0)
 		{
@@ -67,7 +67,7 @@ int		bres4(int x1, int y1, int x2, int y2, t_env *env)
 	dy = (y2 - y1) * 2;
 	while (x1 >= x2)
 	{
-		fdf_addpixel(x1, y1, C_WHITE, env);
+		fdf_addpixel(x1, y1, CAM(color), env);
 		x1--;
 		if ((e += dy) >= 0)
 		{
@@ -75,7 +75,7 @@ int		bres4(int x1, int y1, int x2, int y2, t_env *env)
 			e += dx;
 		}
 	}
-	fdf_addpixel(x2, y2, C_WHITE, env);
+	fdf_addpixel(x2, y2, CAM(color), env);
 	return (0);
 }
 
@@ -90,7 +90,7 @@ int		bres3(int x1, int y1, int x2, int y2, t_env *env)
 	dx = (x2 - x1) * 2;
 	while (y1 <= y2)
 	{
-		fdf_addpixel(x1, y1, C_WHITE, env);
+		fdf_addpixel(x1, y1, CAM(color), env);
 		y1++;
 		if ((e += dx) <= 0)
 		{
@@ -98,7 +98,7 @@ int		bres3(int x1, int y1, int x2, int y2, t_env *env)
 			e += dy;
 		}
 	}
-	fdf_addpixel(x2, y2, C_WHITE, env);
+	fdf_addpixel(x2, y2, CAM(color), env);
 	return (0);
 }
 
@@ -107,10 +107,8 @@ int		fdf_bresenham(t_v3d v1, t_v3d v2, t_env *env)
 	int		dx;
 	int		dz;
 
-	CAM(viewm) = fdf_loadmatrix(env);
-	if (!(fdf_applymatrices(&v1, env)) || !(fdf_applymatrices(&v2, env)))
-		return (0);
-	if (fdf_outofbounds(v1) && fdf_outofbounds(v2))
+	CAM(color) = CAM(mode) ? C_BLACK : C_WHITE;
+	if (fdf_bres_limits(v1, v2, env))
 		return (0);
 	if ((dx = v2.x - v1.x) > 0)
 	{

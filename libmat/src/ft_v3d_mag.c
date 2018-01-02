@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/21 15:56:47 by jquenel           #+#    #+#             */
-/*   Updated: 2017/12/21 16:00:41 by jquenel          ###   ########.fr       */
+/*   Updated: 2017/12/31 19:39:03 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,8 @@
 
 double				ft_v3d_mag(t_v3d const v)
 {
-	return (sqrt(v.x * v.x + v.y * v.y));
+	float	xy;
+
+	xy = sqrt(v.x * v.x + v.y * v.y);
+	return (sqrt(v.z * v.z + xy * xy));
 }
