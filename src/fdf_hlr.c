@@ -6,13 +6,14 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 18:24:20 by jquenel           #+#    #+#             */
-/*   Updated: 2018/01/02 13:10:28 by jquenel          ###   ########.fr       */
+/*   Updated: 2018/01/02 14:56:29 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include <stdlib.h>
 
+#include <sys/time.h>
 t_node			*node_convert(t_node *n2, t_env *env)
 {
 	t_node	*n1;
@@ -62,9 +63,11 @@ int			fdf_determine(t_v3d a, t_v3d b, t_v3d c)
 int			fdf_draw_hlr(t_env *env)
 {
 	t_face		*face;
+	struct timeval stop, start;
 
+	gettimeofday(&start, NULL);
 	face = MAP(face);
-	fdf_zsortfaces(env);
+	//fdf_zsortfaces(env);
 	while (face)
 	{
 		//if (fdf_orient2d(a->v, b->v, c->v) >= 0)
@@ -79,7 +82,12 @@ int			fdf_draw_hlr(t_env *env)
 		}
 		face = face->next;
 	}
+	gettimeofday(&stop, NULL);
+	printf("filling took : %u micros\n", stop.tv_usec - start.tv_usec);
+	gettimeofday(&start, NULL);
 	mlx_put_image_to_window(MLX, WIN, IMG(ptr), 0, 0);
+	gettimeofday(&stop, NULL);
+	printf("drawing took : %u micros\n", stop.tv_usec - start.tv_usec);
 	//for (int i = 0; i < WIDTH * HEIGHT; i++)
 	//	printf("%d", MAP(zmap)[i]);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/21 17:50:18 by jquenel           #+#    #+#             */
-/*   Updated: 2017/12/31 17:03:31 by jquenel          ###   ########.fr       */
+/*   Updated: 2018/01/02 14:32:34 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 # define MAP(x)		(env->map->x)
 
 # define MAX_NFACE		16
-# define WIDTH			1600
-# define HEIGHT			1000
+# define WIDTH			800
+# define HEIGHT			600
 # define ZOOM			20
 # define CAM_START_X	0
 # define CAM_START_Y	20
@@ -61,13 +61,13 @@ typedef struct			s_edge
 {
 	struct s_node	*n1;
 	struct s_node	*n2;
-	float			det;
+	t_bool			drawn;
 	struct s_edge	*next;
 }						t_edge;
 
 typedef struct			s_face
 {
-	t_edge			*edge;
+	t_edge			*edge[3];
 	struct s_node	*a;
 	struct s_node	*b;
 	struct s_node	*c;
@@ -96,6 +96,7 @@ typedef struct			s_map
 	t_node			*save;
 	t_node			**nlist;
 	t_face			*face;
+	t_edge			*edge;
 }						t_map;
 
 typedef struct			s_img

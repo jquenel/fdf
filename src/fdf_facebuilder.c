@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 23:59:52 by jquenel           #+#    #+#             */
-/*   Updated: 2017/12/31 17:08:44 by jquenel          ###   ########.fr       */
+/*   Updated: 2018/01/02 14:31:27 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,13 @@ static void			facehelper(int i, t_env * env)
 	{
 		if (facedecider(-NA->v.z, -NB->v.z, -NC->v.z, -ND->v.z))
 		{
-			fdf_addface(&MAP(face), fdf_newface(NA, NB, ND));
-			fdf_addface(&MAP(face), fdf_newface(NB, NC, ND));
+			fdf_addface(&MAP(face), fdf_newface(NA, NB, ND, env));
+			fdf_addface(&MAP(face), fdf_newface(NB, NC, ND, env));
 		}
 		else
 		{
-			fdf_addface(&MAP(face), fdf_newface(NA, NB, NC));
-			fdf_addface(&MAP(face), fdf_newface(NA, NC, ND));
+			fdf_addface(&MAP(face), fdf_newface(NA, NB, NC, env));
+			fdf_addface(&MAP(face), fdf_newface(NA, NC, ND, env));
 		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 01:21:19 by jquenel           #+#    #+#             */
-/*   Updated: 2018/01/02 13:08:40 by jquenel          ###   ########.fr       */
+/*   Updated: 2018/01/02 14:14:50 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ static int		iscloser(t_face *a, t_face *b)
 	b_mag[0] = ft_v3d_mag(b->a->dv);
 	b_mag[1] = ft_v3d_mag(b->b->dv);
 	b_mag[2] = ft_v3d_mag(b->c->dv);
-	if (!(diff[0] = min3f(a_mag[0], a_mag[1], a_mag[2]) -
-				min3f(b_mag[0], b_mag[1], b_mag[2])))
+	if (!(diff[0] = min3f(a->a->dv.y, a->b->dv.y, a->c->dv.y) -
+				min3f(b->a->dv.y, b->b->dv.y, b->c->dv.y)))
 	{
 		if (!(diff[1] = mid3f(a_mag[0], a_mag[1], a_mag[2]) -
 				mid3f(b_mag[0], b_mag[1], b_mag[2])))
@@ -79,7 +79,6 @@ static int		iscloser(t_face *a, t_face *b)
 	return (diff[0] < 0 ? 1 : 0);
 }
 */
-
 static int		iscloser(t_face *a, t_face *b)
 {
 	float	diff[2];
@@ -87,15 +86,14 @@ static int		iscloser(t_face *a, t_face *b)
 	if (!(diff[0] = min3f(a->a->dv.y, a->b->dv.y, a->c->dv.y) -
 				min3f(b->a->dv.y, b->b->dv.y, b->c->dv.y)))
 	{
-		if (!(diff[1] = max3f(a->a->dv.y, a->b->dv.y, a->c->dv.y) -
-					max3f(b->a->dv.y, b->b->dv.y, b->c->dv.y)))
-			return (mid3f(a->a->dv.y, a->b->dv.y, a->c->dv.y) <
-					mid3f(b->a->dv.y, b->b->dv.y, b->c->dv.y) ? 1 : 0);
+		if (!(diff[1] = mid3f(a->a->dv.y, a->b->dv.y, a->c->dv.y) -
+					mid3f(b->a->dv.y, b->b->dv.y, b->c->dv.y)))
+			return (max3f(a->a->dv.y, a->b->dv.y, a->c->dv.y) <
+					max3f(b->a->dv.y, b->b->dv.y, b->c->dv.y) ? 1 : 0);
 		return (diff[1] < 0 ? 1 : 0);
 	}
 	return (diff[0] < 0 ? 1 : 0);
 }
-
 /*
 int			iscloser(t_face *a, t_face *b)
 {

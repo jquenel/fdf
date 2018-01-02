@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 11:24:06 by jquenel           #+#    #+#             */
-/*   Updated: 2017/12/31 16:56:23 by jquenel          ###   ########.fr       */
+/*   Updated: 2018/01/02 14:57:23 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,27 +45,30 @@ int			fdf_draw_fdf(t_env *env)
 	t_face		*face;
 
 	mlx_clear_window(MLX, WIN);
-	CAM(viewm) = fdf_loadmatrix(env);
 	fdf_applymatrices(env);
 	fdf_move(env);
-	bzero(MAP(zmap), WIDTH * HEIGHT * sizeof(int));
 	ft_bzero(IMG(data), WIDTH * HEIGHT * 4);
 	if (CAM(mode) == 1)
 		return (fdf_draw_hlr(env));
 	face = env->map->face;
 	while (face)
 	{
-		fdf_bresenham(face->edge->n1->dv, face->edge->n2->dv, env);
-		fdf_bresenham(face->edge->next->n1->dv,
-				face->edge->next->n2->dv, env);
-		fdf_bresenham(face->edge->next->next->n1->dv,
-				face->edge->next->next->n2->dv, env);
+		if (!face->edge[0]->drawn)
+			face->edge[0]->drawn = fdf_bresenham(face->edge[0]->n1->dv,
+					face->edge[0]->n2->dv, env);
+		if (!face->edge[1]->drawn)
+			face->edge[1]->drawn = fdf_bresenham(face->edge[1]->n1->dv,
+					face->edge[1]->n2->dv, env);
+		if (!face->edge[2]->drawn)
+			face->edge[2]->drawn = fdf_bresenham(face->edge[2]->n1->dv,
+					face->edge[2]->n2->dv, env);
 		face = face->next;
 	}
+	fdf_clearzmapedges(env);
 	mlx_put_image_to_window(MLX, WIN, IMG(ptr), 0, 0);
 	return (1);
 }
-
+/*
 void		read_face(t_env *env)
 {
 	int		i;
@@ -91,7 +94,7 @@ void		read_face(t_env *env)
 				f->b->v.x, f->b->v.y, f->b->v.z, f->b);
 		printf("|	c [x : %.1lf][y : %.1lf][z : %.1lf][cddr : %p]\n",
 				f->c->v.x, f->c->v.y, f->c->v.z, f->c);
-		e = f->edge;
+		e = f->edge[0];
 		while (e)
 		{
 			printf("|		n1 [x : %.1lf][y : %.1lf][z : %.1lf][addr : %p]\n",
@@ -103,4 +106,4 @@ void		read_face(t_env *env)
 		f = f->next;
 		i++;
 	}
-}
+}*/

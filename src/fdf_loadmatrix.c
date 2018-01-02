@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fdf_loadmatrix.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/01/02 14:19:23 by jquenel           #+#    #+#             */
+/*   Updated: 2018/01/02 14:49:05 by jquenel          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 #include "libmat.h"
 
@@ -39,6 +51,8 @@ int			fdf_applymatrices(t_env *env)
 {
 	//ici du multithread possible
 	t_node		*n;
+
+	CAM(viewm) = fdf_loadmatrix(env);
 	n = MAP(node);
 	while (n)
 	{
@@ -48,8 +62,8 @@ int			fdf_applymatrices(t_env *env)
 			n->dv.y += 0.1;
 		n = n->next;
 	}
-	//if (CAM(mode))
-	//	fdf_zsortfaces(env);
+	if (CAM(mode))
+		fdf_zsortfaces(env);
 	n = MAP(node);
 	while (n)
 	{

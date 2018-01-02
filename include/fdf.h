@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/20 15:01:03 by jquenel           #+#    #+#             */
-/*   Updated: 2017/12/31 14:19:20 by jquenel          ###   ########.fr       */
+/*   Updated: 2018/01/02 14:57:37 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,13 @@ int			fdf_nodecount(t_env *env);
 void		fdf_get_nlist(t_env *env);
 
 void		fdf_addface(t_face **face1, t_face *face2);
-t_face		*fdf_newface(t_node *a, t_node *b, t_node *c);
+t_face		*fdf_newface(t_node *a, t_node *b, t_node *c, t_env *env);
 void		fdf_facebuilder(t_env *env);
 void		read_face(t_env *env);
 
 t_edge		*fdf_newedge(t_node *n1, t_node *n2);
-void		fdf_addedge(t_edge **edge1, t_edge *edge2);
+t_edge		*fdf_addedge(t_edge **edge1, t_edge *edge2);
+void		fdf_clearzmapedges(t_env *env);
 
 t_tlist		*fdf_tlstnew(char **tab);
 void		fdf_tlstpushback(t_tlist **begin_list, t_tlist *list);
