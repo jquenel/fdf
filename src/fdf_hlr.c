@@ -6,13 +6,14 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 18:24:20 by jquenel           #+#    #+#             */
-/*   Updated: 2018/01/02 14:56:29 by jquenel          ###   ########.fr       */
+/*   Updated: 2018/01/02 19:35:09 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include <stdlib.h>
 
+#define FEDGE	face->edge
 #include <sys/time.h>
 t_node			*node_convert(t_node *n2, t_env *env)
 {
@@ -63,9 +64,9 @@ int			fdf_determine(t_v3d a, t_v3d b, t_v3d c)
 int			fdf_draw_hlr(t_env *env)
 {
 	t_face		*face;
-	struct timeval stop, start;
+//	struct timeval stop, start;
 
-	gettimeofday(&start, NULL);
+//	gettimeofday(&start, NULL);
 	face = MAP(face);
 	//fdf_zsortfaces(env);
 	while (face)
@@ -74,20 +75,23 @@ int			fdf_draw_hlr(t_env *env)
 		if (!hlr_limits(face->a, face->b, face->c, env) &&
 			fdf_orient2d(face->a->dv, face->b->dv, face->c->dv) >= 0)
 		{
-			fdf_bresenham(face->a->dv, face->b->dv, env);
-			fdf_bresenham(face->c->dv, face->b->dv, env);
-			fdf_bresenham(face->a->dv, face->c->dv, env);
+			if (!face->edge[0]->drawn)
+				FEDGE[0]->drawn = fdf_bresenham(face->a->dv, face->b->dv, env);
+			if (!face->edge[1]->drawn)
+				FEDGE[1]->drawn = fdf_bresenham(face->c->dv, face->b->dv, env);
+			if (!face->edge[2]->drawn)
+				FEDGE[2]->drawn = fdf_bresenham(face->a->dv, face->c->dv, env);
 			fdf_raster(face->a, face->b, face->c, env);
 			//fdf_raster(face->b, face->a, face->c, env);
 		}
 		face = face->next;
 	}
-	gettimeofday(&stop, NULL);
-	printf("filling took : %u micros\n", stop.tv_usec - start.tv_usec);
-	gettimeofday(&start, NULL);
+//	gettimeofday(&stop, NULL);
+//	printf("filling took : %u micros\n", stop.tv_usec - start.tv_usec);
+//	gettimeofday(&start, NULL);
 	mlx_put_image_to_window(MLX, WIN, IMG(ptr), 0, 0);
-	gettimeofday(&stop, NULL);
-	printf("drawing took : %u micros\n", stop.tv_usec - start.tv_usec);
+//	gettimeofday(&stop, NULL);
+//	printf("drawing took : %u micros\n", stop.tv_usec - start.tv_usec);
 	//for (int i = 0; i < WIDTH * HEIGHT; i++)
 	//	printf("%d", MAP(zmap)[i]);
 	return (0);

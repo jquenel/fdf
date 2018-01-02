@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 01:21:19 by jquenel           #+#    #+#             */
-/*   Updated: 2018/01/02 14:14:50 by jquenel          ###   ########.fr       */
+/*   Updated: 2018/01/02 19:35:12 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,9 +118,9 @@ void			fdf_zsortfaces(t_env *env)
 {
 	t_face		*tmp;
 	t_face		*cur;
-	struct timeval stop, start;
+//	struct timeval stop, start;
 
-	gettimeofday(&start, NULL);
+//	gettimeofday(&start, NULL);
 	/*cur = MAP(face);
 	while (cur)
 	{
@@ -140,8 +140,8 @@ void			fdf_zsortfaces(t_env *env)
 			MAP(face) = tmp;
 		cur = cur->next;
 	}
-	gettimeofday(&stop, NULL);
-	printf("time took : %u\n", stop.tv_usec - start.tv_usec);
+//	gettimeofday(&stop, NULL);
+//	printf("time took : %u\n", stop.tv_usec - start.tv_usec);
 	tmp = MAP(face);
 	/*while (tmp)
 	{

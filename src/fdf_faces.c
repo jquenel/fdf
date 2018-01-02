@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 23:37:43 by jquenel           #+#    #+#             */
-/*   Updated: 2018/01/02 14:32:39 by jquenel          ###   ########.fr       */
+/*   Updated: 2018/01/02 19:14:57 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void			fdf_fton(t_face *f, t_node *n)
 {
 	int		i;
 
+	if (!f || !n)
+		return ;
 	i = 0;
 	while ((n->face)[i])
 		i++;
@@ -45,16 +47,15 @@ t_face			*fdf_newface(t_node *a, t_node *b, t_node *c, t_env *env)
 
 	ft_err(!(face = malloc(sizeof(t_face))), ERR_M, 0);
 	face->a = a;
-	face->b = b;
-	face->c = c;
+	face->b = b ? b : a;
+	face->c = c ? c : a;
 	face->next = NULL;
 	face->prev = NULL;
-	face->edge[0] = fdf_addedge(&(MAP(edge)), fdf_newedge(a, b));
-	face->edge[1] = fdf_addedge(&(MAP(edge)), fdf_newedge(b, c));
-	face->edge[2] = fdf_addedge(&(MAP(edge)), fdf_newedge(c, a));
+	face->edge[0] = fdf_addedge(&(MAP(edge)), fdf_newedge(face->a, face->b));
+	face->edge[1] = fdf_addedge(&(MAP(edge)), fdf_newedge(face->b, face->c));
+	face->edge[2] = fdf_addedge(&(MAP(edge)), fdf_newedge(face->c, face->a));
 	fdf_fton(face, a);
 	fdf_fton(face, b);
 	fdf_fton(face, c);
 	return (face);
 }
-

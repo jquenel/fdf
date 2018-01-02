@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/21 17:50:18 by jquenel           #+#    #+#             */
-/*   Updated: 2018/01/02 14:32:34 by jquenel          ###   ########.fr       */
+/*   Updated: 2018/01/02 15:55:43 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@
 
 # ifndef ERR_CODES
 #  define ERR_CODES
+
+#  define ERR_MAP	"Bad map input."
 
 #  define ERR_M		"Malloc error."
 

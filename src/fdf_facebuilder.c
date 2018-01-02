@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 23:59:52 by jquenel           #+#    #+#             */
-/*   Updated: 2018/01/02 14:31:27 by jquenel          ###   ########.fr       */
+/*   Updated: 2018/01/02 19:13:43 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,27 @@
 #define NB		(MAP(nlist)[i + 1])
 #define	NC		(MAP(nlist)[i + MAP(h) + 1])
 #define ND		(MAP(nlist)[i + MAP(h)])
+
+static void			fdf_specialfaces(t_env *env)
+{
+	t_node	*node;
+
+	if (MAP(h) == 1 || MAP(w) == 1)
+	{
+		if (MAP(w) == 1 && MAP(h) == 1)
+			fdf_addface(&MAP(face), fdf_newface(MAP(node), NULL, NULL, env));
+		else
+		{
+			node = MAP(node);
+			while (node && node->next)
+			{
+				fdf_addface(&MAP(face),
+						fdf_newface(node, node->next, NULL, env));
+				node = node->next;
+			}
+		}
+	}
+}
 
 static int			facedecider(float a, float b, float c, float d)
 {
@@ -82,8 +103,9 @@ void				fdf_facebuilder(t_env *env)
 	while (NA && NB && ND && NC && i + MAP(h) < node_count)
 	{
 		facehelper(i, env);
-		ft_printf(i++ % 100 ? "." : "");
+		ft_printf(!(i++ % 100) ? "." : "");
 	}
+	fdf_specialfaces(env);
 	//read_face(env);
 //	fdf_zsortfaces(env);
 	ft_printf("\nOK\n");
