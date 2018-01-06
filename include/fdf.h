@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/20 15:01:03 by jquenel           #+#    #+#             */
-/*   Updated: 2018/01/02 14:57:37 by jquenel          ###   ########.fr       */
+/*   Updated: 2018/01/04 21:54:09 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void		fdfractol(t_env *env, char *arg);
 
 int			fdf_keypressed(int keycode, t_env *env);
 int			fdf_keyreleased(int keycode, t_env *env);
+int			fdf_buttonpress(int button, int x, int y, t_env *env);
 void		fdf_move(t_env *env);
 void		fdf_reinitcam(t_env *env);
 

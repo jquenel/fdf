@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 10:19:47 by jquenel           #+#    #+#             */
-/*   Updated: 2018/01/02 19:14:04 by jquenel          ###   ########.fr       */
+/*   Updated: 2018/01/03 15:50:01 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ void				fdfer(t_env *env, int fd)
 		tabs = tabs->next;
 		MAP(w)++;
 	}
+	ft_err((MAP(w) == 0 && MAP(h) == 0), ERR_MAP, 0);
 	fdf_facebuilder(env);
 	CAM(pos.y) += MAX(MAP(w), MAP(h));
 }

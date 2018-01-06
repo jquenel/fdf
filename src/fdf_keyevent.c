@@ -6,12 +6,32 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/26 15:29:45 by jquenel           #+#    #+#             */
-/*   Updated: 2017/12/31 14:45:18 by jquenel          ###   ########.fr       */
+/*   Updated: 2018/01/03 17:44:06 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include <stdlib.h>
+
+/*
+** WASD : move
+** UP DOWN or PN5 PN2 : look up down
+** LEFT RIGHT or PN1 PN3 : rotate left right
+** PN4 PN6 : rotate y axis
+** ESC : quit
+** T : toggle draw
+** PN0 : toggle colors
+**
+**
+**
+*/
+
+int			toggle_cam_cmode(t_env *env)
+{
+	if (CAM(cmode) < CAM_CMODE)
+		return (CAM(cmode)++);
+	return ((CAM(cmode) = 0));
+}
 
 int			fdf_keypressed2(int keycode, t_env *env)
 {
@@ -21,6 +41,8 @@ int			fdf_keypressed2(int keycode, t_env *env)
 		return (env->keymap |= FM_NMINUS);
 	if (keycode == FK_T)
 		return (CAM(mode) = CAM(mode) ? 0 : 1);
+	if (keycode == FK_N0)
+		return (toggle_cam_cmode(env));
 	if (keycode == FK_ESC)
 		exit(0);
 	return (0);

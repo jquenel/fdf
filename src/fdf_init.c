@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 10:00:01 by jquenel           #+#    #+#             */
-/*   Updated: 2017/12/31 16:05:41 by jquenel          ###   ########.fr       */
+/*   Updated: 2018/01/04 22:09:13 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void		fdf_init_camera(t_env *env)
 	CAM(speed) = CAM_START_SPD;
 	CAM(yratio) = ZOOM;
 	CAM(mode) = CAM_MODE;
+	CAM(cmode) = CAM_CMODE;
 	ft_err(!(CAM(img) = (t_img *)malloc(sizeof(t_cam))), ERR_M, 0);
 	IMG(ptr) = mlx_new_image(MLX, WIDTH, HEIGHT);
 	IMG(data) = mlx_get_data_addr(IMG(ptr), &(IMG(bpp)), &(IMG(lsize)),
@@ -41,6 +42,23 @@ void		fdf_init_map(t_env *env)
 	ft_bzero(MAP(zmap), WIDTH * HEIGHT);
 }
 
+void		fdf_init_fal(t_env *env)
+{
+	ft_err(!(env->fal = malloc(sizeof(t_fal))), ERR_M, 0);
+	FAL(start)[0] = FAL_LX;
+	FAL(lx) = FAL_LX;
+	FAL(start)[1] = FAL_HX;
+	FAL(hx) = FAL_HX;
+	FAL(start)[2] = FAL_LY;
+	FAL(ly) = FAL_LY;
+	FAL(start)[3] = FAL_HY;
+	FAL(hy) = FAL_HY;
+	FAL(center)[0] = FAL_WC;
+	FAL(center)[1] = FAL_HC;
+	FAL(w) = FAL_W;
+	FAL(h) = FAL_H;
+}
+
 void		fdf_init_env(t_env **env)
 {
 	//ft_errcheck
@@ -52,4 +70,5 @@ void		fdf_init_env(t_env **env)
 	//(*env)->win_help = mlx_new_window((*env)->mlx, 400, 400, "fdf_help");
 	fdf_init_map(*env);
 	fdf_init_camera(*env);
+	fdf_init_fal(*env);
 }

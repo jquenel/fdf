@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/21 17:50:18 by jquenel           #+#    #+#             */
-/*   Updated: 2018/01/02 15:55:43 by jquenel          ###   ########.fr       */
+/*   Updated: 2018/01/04 22:10:00 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,11 @@
 # define CAM(x)		(env->cam->x)
 # define IMG(x)		(CAM(img)->x)
 # define MAP(x)		(env->map->x)
+# define FAL(x)		(env->fal->x)
 
 # define MAX_NFACE		16
-# define WIDTH			800
-# define HEIGHT			600
+# define WIDTH			1600
+# define HEIGHT			1200
 # define ZOOM			20
 # define CAM_START_X	0
 # define CAM_START_Y	20
@@ -35,7 +36,19 @@
 # define CAM_START_RZ	M_PI / -2
 # define CAM_START_SPD	0.1
 # define CAM_MODE		0
+# define CAM_CMODE		2
+# define CAM_COLORS		2
 # define R_TOLERANCE	20
+
+# define FAL_LX			-2.5
+# define FAL_HX			1.5
+# define FAL_LY			-1.6
+# define FAL_HY			1.5
+# define FAL_WC			-1.0
+# define FAL_HC			0.0
+# define FAL_W			4.0
+# define FAL_H			3.0
+# define FAL_ZOOM		0.5
 
 # ifndef ERR_CODES
 #  define ERR_CODES
@@ -58,6 +71,18 @@ typedef int				t_bool;
 **		When a face is created, these are ordered so that their determinant
 		should be superior or equal to 0 when computed in that order.
 */
+
+typedef struct			s_fal
+{
+	double			lx;
+	double			hx;
+	double			ly;
+	double			hy;
+	double			center[2];
+	double			w;
+	double			h;
+	double			start[4];
+}						t_fal;
 
 typedef struct			s_edge
 {
@@ -83,7 +108,6 @@ typedef struct			s_node
 	t_v3d			v;
 	t_v3d			dv;
 	t_face			*face[MAX_NFACE];
-	float			height;
 	struct s_node	*next;
 	struct s_node	*prev;
 }						t_node;
@@ -120,6 +144,7 @@ typedef struct			s_cam
 	float			yratio;
 	int				mode;
 	int				color;
+	int				cmode;
 }						t_cam;
 
 typedef struct			s_env
@@ -129,6 +154,7 @@ typedef struct			s_env
 	void			*win_help;
 	t_map			*map;
 	t_cam			*cam;
+	t_fal			*fal;
 	int32_t			keymap;
 }						t_env;
 

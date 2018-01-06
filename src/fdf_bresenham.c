@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 07:53:20 by jquenel           #+#    #+#             */
-/*   Updated: 2017/12/31 16:54:59 by jquenel          ###   ########.fr       */
+/*   Updated: 2018/01/03 18:20:31 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		bres1(int x1, int y1, int x2, int y2, t_env *env)
 			e += dx;
 		}
 	}
-	return (0);
+	return (1);
 }
 
 int		bres2(int x1, int y1, int x2, int y2, t_env *env)
@@ -53,7 +53,7 @@ int		bres2(int x1, int y1, int x2, int y2, t_env *env)
 			e += dy;
 		}
 	}
-	return (0);
+	return (1);
 }
 
 int		bres4(int x1, int y1, int x2, int y2, t_env *env)
@@ -76,7 +76,7 @@ int		bres4(int x1, int y1, int x2, int y2, t_env *env)
 		}
 	}
 	fdf_addpixel(x2, y2, CAM(color), env);
-	return (0);
+	return (1);
 }
 
 int		bres3(int x1, int y1, int x2, int y2, t_env *env)
@@ -99,7 +99,7 @@ int		bres3(int x1, int y1, int x2, int y2, t_env *env)
 		}
 	}
 	fdf_addpixel(x2, y2, CAM(color), env);
-	return (0);
+	return (1);
 }
 
 int		fdf_bresenham(t_v3d v1, t_v3d v2, t_env *env)

@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 08:33:21 by jquenel           #+#    #+#             */
-/*   Updated: 2017/12/31 15:53:19 by jquenel          ###   ########.fr       */
+/*   Updated: 2018/01/03 18:21:04 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		bres5(int x1, int y1, int x2, int y2, t_env *env)
 		}
 	}
 	fdf_addpixel((int)x2, (int)y2, CAM(color), env);
-	return (0);
+	return (1);
 }
 
 int		bres6(int x1, int y1, int x2, int y2, t_env *env)
@@ -55,7 +55,7 @@ int		bres6(int x1, int y1, int x2, int y2, t_env *env)
 		}
 	}
 	fdf_addpixel((int)x2, (int)y2, CAM(color), env);
-	return (0);
+	return (1);
 }
 
 int		bres7(int x1, int y1, int x2, int y2, t_env *env)
@@ -78,7 +78,7 @@ int		bres7(int x1, int y1, int x2, int y2, t_env *env)
 		}
 	}
 	fdf_addpixel((int)x2, (int)y2, CAM(color), env);
-	return (0);
+	return (1);
 }
 
 int		bres8(int x1, int y1, int x2, int y2, t_env *env)
@@ -100,15 +100,15 @@ int		bres8(int x1, int y1, int x2, int y2, t_env *env)
 			e += dx;
 		}
 	}
-	return (0);
+	return (1);
 }
 
 int		fdf_bres_limits(t_v3d a, t_v3d b, t_env *env)
 {
 	if (fdf_outofbounds(a) && fdf_outofbounds(b))
 		return (1);
-	if (a.y > 40 + CAM(pos.y) || a.y <= 0.1 ||
-	b.y > 40 + CAM(pos.y) || b.y <= 0.1)
+	if (a.y > CAM(pos.y) + CAM_START_Y || a.y <= 0.1 ||
+	b.y > CAM(pos.y) + CAM_START_Y || b.y <= 0.1)
 		return (1);
 	return (0);
 }

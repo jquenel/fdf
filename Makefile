@@ -20,15 +20,16 @@ SRC_NAME=	main.c\
 			fdf_facebuilder.c\
 			fdf_edges.c\
 			fdf_draw1.c\
+			fdf_draw_fractol.c\
 			fdf_draw2.c\
 			fdf_rotxyz.c\
 			fdf_hlr.c\
 			fdf_raster.c\
 			fdf_keyevent.c\
+			fdf_buttonpress.c\
 			fdf_tlst.c\
 			fdf_bresenham.c\
 			fdf_bresenham_2.c\
-
 
 SRC=		$(addprefix $(SRC_PATH)/,$(SRC_NAME))
 

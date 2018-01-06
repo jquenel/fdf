@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 20:11:12 by jquenel           #+#    #+#             */
-/*   Updated: 2018/01/02 13:34:07 by jquenel          ###   ########.fr       */
+/*   Updated: 2018/01/03 17:38:11 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,21 +32,41 @@ static float	max3f(float a, float b, float c)
 	return (a < c ? lround(c) : lround(a));
 }
 
+int				fdf_get_color(t_node *a, t_node *b, t_node *c, t_v3d *v,
+								t_env *env)
+{
+	t_color		col;
+
+	if (CAM(cmode) == 1)
+	{
+		col.c[0] = MIN(255, (a->v.z * ft_v3d_mag(ft_v3d_sub(a->dv, *v))));
+		col.c[1] = MIN(255, (b->v.z * ft_v3d_mag(ft_v3d_sub(b->dv, *v))));
+		col.c[2] = MIN(255, (c->v.z * ft_v3d_mag(ft_v3d_sub(c->dv, *v))));
+		col.c[3] = MIN(255, (v->y) * 2.5);
+	}
+	if (CAM(cmode) == 2)
+	{
+		col.c[0] = fdf_orient2d(a->dv, b->dv, *v) / 2;
+		col.c[1] = fdf_orient2d(b->dv, c->dv, *v) / 2;
+		col.c[2] = fdf_orient2d(c->dv, a->dv, *v) / 2;
+		//col.c[3] = MIN(255, (v->y) * 2.5);
+	}
+	return (col.i);
+}
+
 int			raster_draw(t_node *a, t_node *b, t_node *c, int i[3], t_env *env)
 {
 	int	det[3];
 	t_v3d	v;
-	t_color	col;
 
-	v.x = i[0];
-	v.z = i[2];
+	v = ft_v3d_new(i[0], (a->dv.y + b->dv.y + c->dv.y) / 3, i[2]);
 	det[0] = fdf_orient2d(a->dv, b->dv, v);
 	det[1] = fdf_orient2d(b->dv, c->dv, v);
 	det[2] = fdf_orient2d(c->dv, a->dv, v);
 	if (det[0] >= 0 && det[1] >= 0 && det[2] >= 0)
 	{
-		col.i = C_WHITE;
-		fdf_addpixel(i[0], i[2], col.i, env);
+		fdf_addpixel(i[0], i[2],
+		CAM(cmode) ? fdf_get_color(a, b, c, &v, env) : C_WHITE, env);
 		MAP(zmap)[i[0] + i[2] * WIDTH] = 1;
 	}
 	return (1);
