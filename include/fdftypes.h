@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/21 17:50:18 by jquenel           #+#    #+#             */
-/*   Updated: 2018/01/04 22:10:00 by jquenel          ###   ########.fr       */
+/*   Updated: 2018/01/06 23:47:37 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,13 @@
 # define CAM_COLORS		2
 # define R_TOLERANCE	20
 
-# define FAL_LX			-2.5
-# define FAL_HX			1.5
-# define FAL_LY			-1.6
-# define FAL_HY			1.5
 # define FAL_WC			-1.0
 # define FAL_HC			0.0
-# define FAL_W			4.0
-# define FAL_H			3.0
+# define FAL_W			2.0
+# define FAL_H			2.0
 # define FAL_ZOOM		0.5
+# define FAL_SIZE		20
+# define FAL_ITER		30
 
 # ifndef ERR_CODES
 #  define ERR_CODES
@@ -71,6 +69,13 @@ typedef int				t_bool;
 **		When a face is created, these are ordered so that their determinant
 		should be superior or equal to 0 when computed in that order.
 */
+
+typedef struct			s_tinfos
+{
+	double			*c[2];
+	struct s_node	*node;
+	int				iter;
+}						t_tinfos;
 
 typedef struct			s_fal
 {
@@ -107,6 +112,8 @@ typedef struct			s_node
 {
 	t_v3d			v;
 	t_v3d			dv;
+	t_bool			lit;
+	double			fvalue;
 	t_face			*face[MAX_NFACE];
 	struct s_node	*next;
 	struct s_node	*prev;

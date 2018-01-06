@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/20 15:00:21 by jquenel           #+#    #+#             */
-/*   Updated: 2018/01/04 21:51:07 by jquenel          ###   ########.fr       */
+/*   Updated: 2018/01/06 21:02:07 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int			main(int argc, char **argv)
 	mlx_hook(WIN, KeyPress, KeyPressMask, fdf_keypressed, env);
 	mlx_hook(WIN, KeyRelease, KeyReleaseMask, fdf_keyreleased, env);
 	mlx_hook(WIN, ButtonPress, Button1Mask, fdf_buttonpress, env);
-	mlx_loop_hook(MLX, MAP(type) == 2 ? fdf_draw_fdf : fdf_draw_fractol, env);
+	//mlx_loop_hook(MLX, MAP(type) == 2 ? fdf_draw_fdf : fdf_draw_fractol, env);
+	mlx_loop_hook(MLX, fdf_draw_fdf, env);
 	printf("3\n");
 	printf("wat\n");
 	mlx_loop(MLX);

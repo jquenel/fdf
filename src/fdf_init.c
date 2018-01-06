@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 10:00:01 by jquenel           #+#    #+#             */
-/*   Updated: 2018/01/04 22:09:13 by jquenel          ###   ########.fr       */
+/*   Updated: 2018/01/06 23:14:37 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,18 @@ void		fdf_init_map(t_env *env)
 void		fdf_init_fal(t_env *env)
 {
 	ft_err(!(env->fal = malloc(sizeof(t_fal))), ERR_M, 0);
-	FAL(start)[0] = FAL_LX;
-	FAL(lx) = FAL_LX;
-	FAL(start)[1] = FAL_HX;
-	FAL(hx) = FAL_HX;
-	FAL(start)[2] = FAL_LY;
-	FAL(ly) = FAL_LY;
-	FAL(start)[3] = FAL_HY;
-	FAL(hy) = FAL_HY;
 	FAL(center)[0] = FAL_WC;
 	FAL(center)[1] = FAL_HC;
 	FAL(w) = FAL_W;
 	FAL(h) = FAL_H;
+	FAL(lx) = FAL(center)[0] - FAL(w) / 2;
+	FAL(hx) = FAL(center)[0] + FAL(w) / 2;
+	FAL(ly) = FAL(center)[1] - FAL(h) / 2;
+	FAL(hy) = FAL(center)[1] + FAL(h) / 2;
+	FAL(start)[0] = FAL(lx);
+	FAL(start)[1] = FAL(hx);
+	FAL(start)[2] = FAL(ly);
+	FAL(start)[3] = FAL(hy);
 }
 
 void		fdf_init_env(t_env **env)

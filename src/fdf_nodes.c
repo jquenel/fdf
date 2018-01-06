@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 11:15:40 by jquenel           #+#    #+#             */
-/*   Updated: 2017/12/31 14:41:15 by jquenel          ###   ########.fr       */
+/*   Updated: 2018/01/06 21:08:34 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ t_node		*fdf_newnode(t_v3d v)
 	ft_err(!(n = (t_node *)malloc(sizeof(t_node))), ERR_M, 0);
 	n->v = ft_v3d_new(v.x, v.y, v.z);
 	n->dv = ft_v3d_new(v.x, v.y, v.z);
+	n->fvalue = 0;
+	n->lit = TRUE;
 	n->next = NULL;
 	n->prev = NULL;
 	i = -1;
@@ -44,7 +46,7 @@ t_node		*fdf_newnode(t_v3d v)
 	return (n);
 }
 
-void		fdf_addnode(t_node	**node1, t_node *node2)
+void		fdf_addnode(t_node **node1, t_node *node2)
 {
 	t_node		*tmp;
 
