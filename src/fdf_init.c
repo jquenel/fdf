@@ -6,27 +6,12 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 10:00:01 by jquenel           #+#    #+#             */
-/*   Updated: 2018/01/06 23:14:37 by jquenel          ###   ########.fr       */
+/*   Updated: 2018/01/09 14:08:01 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include <stdlib.h>
-
-void		fdf_init_camera(t_env *env)
-{
-	ft_err(!(env->cam = (t_cam *)malloc(sizeof(t_cam))), ERR_M, 0);
-	CAM(pos) = ft_v3d_new(CAM_START_X, CAM_START_Y, CAM_START_Z);
-	CAM(angle) = ft_v3d_new(CAM_START_RX, CAM_START_RY, CAM_START_RZ);
-	CAM(speed) = CAM_START_SPD;
-	CAM(yratio) = ZOOM;
-	CAM(mode) = CAM_MODE;
-	CAM(cmode) = CAM_CMODE;
-	ft_err(!(CAM(img) = (t_img *)malloc(sizeof(t_cam))), ERR_M, 0);
-	IMG(ptr) = mlx_new_image(MLX, WIDTH, HEIGHT);
-	IMG(data) = mlx_get_data_addr(IMG(ptr), &(IMG(bpp)), &(IMG(lsize)),
-			&(IMG(endian)));
-}
 
 void		fdf_init_map(t_env *env)
 {

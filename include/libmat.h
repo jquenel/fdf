@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/21 13:13:40 by jquenel           #+#    #+#             */
-/*   Updated: 2017/12/31 22:48:17 by jquenel          ###   ########.fr       */
+/*   Updated: 2018/01/09 15:07:18 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,10 @@ typedef struct		s_mx4
 }					t_mx4;
 
 t_v3d				ft_v3d_new(double x, double y, double z);
+t_mx4				ft_mx4_new(t_v3d a, t_v3d b, t_v3d c);
 t_v3d				ft_v3d_add(t_v3d const v1, t_v3d const v2);
 t_v3d				ft_v3d_sub(t_v3d const v1, t_v3d const v2);
+t_v3d				ft_v3d_scale(t_v3d v, float f);
 float				ft_v3d_dot(t_v3d const v1, t_v3d const v2);
 t_v3d				ft_v3d_normalize(t_v3d const v);
 double				ft_v3d_dir(t_v3d const v);

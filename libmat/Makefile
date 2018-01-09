@@ -8,11 +8,13 @@ H_PATH=		./include/
 
 SRC_LIST=	ft_v3d_add.c\
 			ft_v3d_sub.c\
+			ft_v3d_scale.c\
 			ft_v3d_new.c\
+			ft_mx4_new.c\
 			ft_v3d_mag.c\
 			ft_v3d_dir.c\
 			ft_v3d_dot.c\
-			ft_v3d_norm.c\
+			ft_v3d_normalize.c\
 			ft_v3d_copy.c\
 			ft_v3d_x_v3d.c\
 			ft_v3d_x_mx4.c\

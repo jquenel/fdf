@@ -12,6 +12,7 @@ CPPFLAGS=	-Iinclude
 
 SRC_NAME=	main.c\
 			fdf_init.c\
+			fdf_init_cam.c\
 			fdf_parser.c\
 			fdf_loadmatrix.c\
 			fdf_zsort.c\
