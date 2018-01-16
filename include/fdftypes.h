@@ -77,6 +77,14 @@ typedef struct			s_tinfos
 	int				iter;
 }						t_tinfos;
 
+typedef struct			s_cube
+{
+	struct s_node	*main[4];
+	struct s_node	*opp[4];
+	int		m;
+	int		o;
+}						t_cube;
+
 typedef struct			s_fal
 {
 	double			lx;
@@ -87,6 +95,7 @@ typedef struct			s_fal
 	double			w;
 	double			h;
 	double			start[4];
+	struct s_node	***nlist;
 }						t_fal;
 
 typedef struct			s_edge
@@ -113,6 +122,7 @@ typedef struct			s_node
 	t_v3d			v;
 	t_v3d			dv;
 	t_bool			lit;
+	t_bool			active;
 	double			fvalue;
 	t_face			*face[MAX_NFACE];
 	struct s_node	*next;
