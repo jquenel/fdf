@@ -34,14 +34,14 @@ void		fdfer(t_env *env, int fd);
 
 void		fdfractol(t_env *env, char *arg);
 void		fdf_create_folume (t_env *env);
-t_cube		*fdf_get_cube(int i, int j, int k, t_node ***nlist, t_node **cn);
+t_cube		*fdf_get_cube(int *i, t_node ***nlist, t_node **cn);
 void		fdf_cube_is_a_lie(t_cube *cb, char cube, t_node **cn);
-void		main_face_0(t_cube *cb, char cube, t_node **cn);
-void		main_face_1(t_cube *cb, char cube, t_node **cn);
-void		main_face_2(t_cube *cb, char cube, t_node **cn);
-void		main_face_3(t_cube *cb, char cube, t_node **cn);
-void		main_face_4(t_cube *cb, char cube, t_node **cn);
-void		main_face_5(t_cube *cb, char cube, t_node **cn);
+void		main_face_0(t_cube *cb, char cube, t_node **cn, int *fv);
+void		main_face_1(t_cube *cb, char cube, t_node **cn, int *fv);
+void		main_face_2(t_cube *cb, char cube, t_node **cn, int *fv);
+void		main_face_3(t_cube *cb, char cube, t_node **cn, int *fv);
+void		main_face_4(t_cube *cb, char cube, t_node **cn, int *fv);
+void		main_face_5(t_cube *cb, char cube, t_node **cn, int *fv);
 void		fdf_wut_face(t_cube *cb, t_env *env);
 
 int			fdf_keypressed(int keycode, t_env *env);

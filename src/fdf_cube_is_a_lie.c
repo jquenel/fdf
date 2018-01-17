@@ -35,16 +35,16 @@ void		fdf_cube_is_a_lie(t_cube *cb, char cube, t_node **cn)
 	ft_err(!(cb = (t_cube *)malloc(sizeof(t_cube))), ERR_M, 0);
 	if (fv[0] >= fv[1] && fv[0] >= fv[2] && fv[0] >= fv[3] &&
 		fv[0] >= fv[4] && fv[0] >= fv[5])
-		main_face_0(cb, cube, cn);
+		main_face_0(cb, cube, cn, fv);
 	else if (fv[1] >= fv[2] && fv[1] >= fv[3] &&
 		fv[1] >= fv[4] && fv[1] >= fv[5])
-		main_face_1(cb, cube, cn);
+		main_face_1(cb, cube, cn, fv);
 	else if (fv[2] >= fv[3] && fv[2] >= fv[4] && fv[2] >= fv[5])
-		main_face_2(cb, cube, cn);
+		main_face_2(cb, cube, cn, fv);
 	else if (fv[3] >= fv[4] && fv[3] >= fv[5])
-		main_face_3(cb, cube, cn);
+		main_face_3(cb, cube, cn, fv);
 	else if (fv[4] >= fv[5])
-		main_face_4(cb, cube, cn);
+		main_face_4(cb, cube, cn, fv);
 	else
-		main_face_5(cb, cube, cn);
+		main_face_5(cb, cube, cn, fv);
 }
