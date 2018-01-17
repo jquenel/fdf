@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/20 15:01:03 by jquenel           #+#    #+#             */
-/*   Updated: 2018/01/11 21:45:18 by jquenel          ###   ########.fr       */
+/*   Updated: 2018/01/17 18:03:47 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,18 @@ void		fdf_init_camera(t_env *env);
 void		fdf_parser(t_env *env, char *arg);
 void		fdfer(t_env *env, int fd);
 void		fdfractol(t_env *env);
-void		fdf_fildefractol(t_finfos *cloud, t_env *env);
+
+void		fdfractol(t_env *env, char *arg);
+void		fdf_create_folume (t_env *env);
+t_cube		*fdf_get_cube(int *i, t_node ***nlist, t_node **cn);
+void		fdf_cube_is_a_lie(t_cube *cb, char cube, t_node **cn);
+void		main_face_0(t_cube *cb, char cube, t_node **cn, int *fv);
+void		main_face_1(t_cube *cb, char cube, t_node **cn, int *fv);
+void		main_face_2(t_cube *cb, char cube, t_node **cn, int *fv);
+void		main_face_3(t_cube *cb, char cube, t_node **cn, int *fv);
+void		main_face_4(t_cube *cb, char cube, t_node **cn, int *fv);
+void		main_face_5(t_cube *cb, char cube, t_node **cn, int *fv);
+void		fdf_wut_face(t_cube *cb, t_env *env);
 
 int			fdf_keypressed(int keycode, t_env *env);
 int			fdf_keyreleased(int keycode, t_env *env);

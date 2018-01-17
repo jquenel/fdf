@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/21 17:50:18 by jquenel           #+#    #+#             */
-/*   Updated: 2018/01/11 21:45:15 by jquenel          ###   ########.fr       */
+/*   Updated: 2018/01/17 18:02:31 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "libmat.h"
 # include <inttypes.h>
+# include "fdfconfig.h"
 
 # define MLX		env->mlx
 # define WIN		env->win_fdf
@@ -24,37 +25,10 @@
 # define MAP(x)		(env->map->x)
 # define FAL(x)		(env->fal->x)
 
-# define MAX_NFACE		16
-# define WIDTH			1600
-# define HEIGHT			1200
-# define ZOOM			16
-# define CAM_START_X	0
-# define CAM_START_Y	20
-# define CAM_START_Z	0
-# define CAM_START_RX	M_PI / -3
-# define CAM_START_RY	0
-# define CAM_START_RZ	M_PI / -2
-# define CAM_START_SPD	0.1
-# define CAM_MODE		0
-# define CAM_CMODE		2
-# define CAM_COLORS		2
-# define R_TOLERANCE	20
-
-# define FAL_WC			-1.0
-# define FAL_HC			0.0
-# define FAL_W			3.5
-# define FAL_H			3.0
-# define FAL_ZOOM		0.5
-# define FAL_SIZE		4
-# define FAL_ITER		30
-
 # ifndef ERR_CODES
 #  define ERR_CODES
-
 #  define ERR_MAP	"Bad map input."
-
 #  define ERR_M		"Malloc error."
-
 # endif
 
 # ifndef T_BOOL
@@ -77,11 +51,14 @@ typedef struct			s_tinfos
 	int				iter;
 }						t_tinfos;
 
-typedef struct			s_finfos
+typedef struct			s_cube
+
 {
-	double			value;
-	t_bool			lit;
-}						t_finfos;
+	struct s_node	*main[4];
+	struct s_node	*opp[4];
+	int		m;
+	int		o;
+}						t_cube;
 
 typedef struct			s_fal
 {
@@ -93,7 +70,7 @@ typedef struct			s_fal
 	double			w;
 	double			h;
 	double			start[4];
-	struct s_node	*vox;
+	struct s_node	***nlist;
 }						t_fal;
 
 typedef struct			s_edge
@@ -120,6 +97,7 @@ typedef struct			s_node
 	t_v3d			v;
 	t_v3d			dv;
 	t_bool			lit;
+	t_bool			active;
 	double			fvalue;
 	t_face			*face[MAX_NFACE];
 	struct s_node	*next;
