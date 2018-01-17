@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 08:33:21 by jquenel           #+#    #+#             */
-/*   Updated: 2018/01/06 21:10:05 by jquenel          ###   ########.fr       */
+/*   Updated: 2018/01/10 15:23:55 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,9 @@ int		fdf_bres_limits(t_v3d a, t_v3d b, t_env *env)
 {
 	if (fdf_outofbounds(a) && fdf_outofbounds(b))
 		return (1);
-	if (a.y > CAM(pos.y) + CAM_START_Y || a.y <= 0.1 ||
-	b.y > CAM(pos.y) + CAM_START_Y || b.y <= 0.1)
+	//if (a.y > CAM(pos.y) + CAM_START_Y || a.y <= 0.1 ||
+	//b.y > CAM(pos.y) + CAM_START_Y || b.y <= 0.1)
+	if (a.y <= 0.1 || b.y <= 0.1)
 		return (1);
 	return (0);
 }

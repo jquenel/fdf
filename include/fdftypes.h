@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/21 17:50:18 by jquenel           #+#    #+#             */
-/*   Updated: 2018/01/09 17:34:38 by jquenel          ###   ########.fr       */
+/*   Updated: 2018/01/11 21:45:15 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 # define FAL(x)		(env->fal->x)
 
 # define MAX_NFACE		16
-# define WIDTH			800
-# define HEIGHT			600
+# define WIDTH			1600
+# define HEIGHT			1200
 # define ZOOM			16
 # define CAM_START_X	0
 # define CAM_START_Y	20
@@ -42,10 +42,10 @@
 
 # define FAL_WC			-1.0
 # define FAL_HC			0.0
-# define FAL_W			2.0
-# define FAL_H			2.0
+# define FAL_W			3.5
+# define FAL_H			3.0
 # define FAL_ZOOM		0.5
-# define FAL_SIZE		20
+# define FAL_SIZE		4
 # define FAL_ITER		30
 
 # ifndef ERR_CODES
@@ -77,6 +77,12 @@ typedef struct			s_tinfos
 	int				iter;
 }						t_tinfos;
 
+typedef struct			s_finfos
+{
+	double			value;
+	t_bool			lit;
+}						t_finfos;
+
 typedef struct			s_fal
 {
 	double			lx;
@@ -87,6 +93,7 @@ typedef struct			s_fal
 	double			w;
 	double			h;
 	double			start[4];
+	struct s_node	*vox;
 }						t_fal;
 
 typedef struct			s_edge

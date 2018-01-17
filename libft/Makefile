@@ -150,7 +150,6 @@ fclean:		clean
 
 lclean:		fclean
 			$(MAKE) fclean -C libft
-
 lre:			lclean all
 
 re:			fclean all

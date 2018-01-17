@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/20 15:01:03 by jquenel           #+#    #+#             */
-/*   Updated: 2018/01/09 15:22:45 by jquenel          ###   ########.fr       */
+/*   Updated: 2018/01/11 21:45:18 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ void		fdf_init_env(t_env **env);
 void		fdf_init_camera(t_env *env);
 void		fdf_parser(t_env *env, char *arg);
 void		fdfer(t_env *env, int fd);
-void		fdfractol(t_env *env, char *arg);
+void		fdfractol(t_env *env);
+void		fdf_fildefractol(t_finfos *cloud, t_env *env);
 
 int			fdf_keypressed(int keycode, t_env *env);
 int			fdf_keyreleased(int keycode, t_env *env);
