@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 11:15:40 by jquenel           #+#    #+#             */
-/*   Updated: 2018/01/10 13:37:17 by jquenel          ###   ########.fr       */
+/*   Updated: 2018/01/17 23:36:46 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ t_node		*fdf_newnode(t_v3d v)
 	n->lit = TRUE;
 	n->next = NULL;
 	n->prev = NULL;
-	i = -1;
-	while (++i < MAX_NFACE)
+	i = MAX_NFACE;
+	while (i--)
 		n->face[i] = NULL;
 	return (n);
 }

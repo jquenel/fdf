@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 23:37:43 by jquenel           #+#    #+#             */
-/*   Updated: 2018/01/02 19:14:57 by jquenel          ###   ########.fr       */
+/*   Updated: 2018/01/17 23:35:33 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void			fdf_fton(t_face *f, t_node *n)
 	i = 0;
 	while ((n->face)[i])
 		i++;
-		(n->face)[i] = f;
+	(n->face)[i] = f;
 }
 
 t_face			*fdf_newface(t_node *a, t_node *b, t_node *c, t_env *env)

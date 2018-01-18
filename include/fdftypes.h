@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/21 17:50:18 by jquenel           #+#    #+#             */
-/*   Updated: 2018/01/17 18:02:31 by jquenel          ###   ########.fr       */
+/*   Updated: 2018/01/17 23:31:48 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct			s_cube
 	struct s_node	*opp[4];
 	int		m;
 	int		o;
+	char	cube;
 }						t_cube;
 
 typedef struct			s_fal
@@ -71,6 +72,8 @@ typedef struct			s_fal
 	double			h;
 	double			start[4];
 	struct s_node	***nlist;
+	struct s_node	*npool;
+	struct s_face	*fpool;
 }						t_fal;
 
 typedef struct			s_edge

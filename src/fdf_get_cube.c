@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fdf_get_cube.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/01/17 23:27:16 by jquenel           #+#    #+#             */
+/*   Updated: 2018/01/17 23:27:18 by jquenel          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 #include <stdlib.h>
 
@@ -27,14 +39,13 @@ void			companion_nodes(int i, int j, int k, t_node ***nlist,
 	cn[7] = nlist[i][j + 1][k + 1].active ? &nlist[i][j + 1][k + 1] : NULL;
 }
 
-t_cube	*fdf_get_cube(int *i, t_node ***nlist, t_node **cn)
+t_cube		*fdf_get_cube(int *i, t_cube *cb, t_node ***nlist, t_node **cn)
 {
-	t_cube	*cb;
 	char	cube;
+	int		fv[6];
 
-	cb = NULL;
 	companion_nodes(i[0], i[1], i[2], nlist, cn);
 	cube = companion_cube(cn);
-	fdf_cube_is_a_lie(cb, cube, cn);
+	fdf_cube_is_a_lie(cb, cube, cn, fv);
 	return (cb);
 }
