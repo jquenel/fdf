@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/20 15:01:03 by jquenel           #+#    #+#             */
-/*   Updated: 2018/01/17 23:50:51 by jquenel          ###   ########.fr       */
+/*   Updated: 2018/01/31 23:15:13 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,14 @@ void		fdf_parser(t_env *env, char *arg);
 void		fdfer(t_env *env, int fd);
 void		fdfractol(t_env *env);
 
-void		fdfractol(t_env *env, char *arg);
+void		fdfractol(t_env *env);
+void		fdf_clean_cloud(t_env *env);
 void		fdf_create_folume (t_env *env);
-t_cube		*fdf_get_cube(int *i, t_cube *cb, t_node ***nlist, t_node **cn);
+t_cube		*fdf_get_cube(int *i, t_cube *cb, t_node **nlist, t_node **cn);
+void		fdf_cube_rotate_clock(t_cube *cb);
+void		fdf_cube_rotate_counter_clock(t_cube *cb);
 
-void		fdf_cube_is_a_lie(t_cube *cb, char cube, t_node **cn, int *fv);
+t_cube		*fdf_cube_is_a_lie(t_cube *cb, char cube, t_node **cn, int *fv);
 void		main_face_0(t_cube *cb, char cube, t_node **cn, int *fv);
 void		main_face_1(t_cube *cb, char cube, t_node **cn, int *fv);
 void		main_face_2(t_cube *cb, char cube, t_node **cn, int *fv);
@@ -55,6 +58,7 @@ void		wut_face_3_3(t_cube *cb, t_env *env);
 void		wut_face_3_2(t_cube *cb, t_env *env);
 void		wut_face_3_1(t_cube *cb, t_env *env);
 void		wut_face_3_0(t_cube *cb, t_env *env);
+void		wut_face_2_2(t_cube *cb, t_env *env);
 void		wut_face_2_1(t_cube *cb, t_env *env);
 
 int			fdf_keypressed(int keycode, t_env *env);
@@ -81,6 +85,7 @@ void		fdf_zsortfaces(t_env *env);
 void		fdf_addnode(t_node **node1, t_node *node2);
 t_node		*fdf_newnode(t_v3d v);
 int			fdf_nodecount(t_env *env);
+void		fdf_move_node(t_node **dst_lst, t_node **src_lst, t_node *n);
 void		fdf_get_nlist(t_env *env);
 
 void		fdf_addface(t_face **face1, t_face *face2);

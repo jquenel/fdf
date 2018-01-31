@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 23:37:43 by jquenel           #+#    #+#             */
-/*   Updated: 2018/01/17 23:35:33 by jquenel          ###   ########.fr       */
+/*   Updated: 2018/01/31 00:13:53 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ void			fdf_addface(t_face **face1, t_face *face2)
 		tmp->next = face2;
 		face2->prev = tmp;
 	}
+	printf("added a face :\na{%p}[%.1lf][%.1lf][%.1lf]\nb{%p}[%.1lf][%.1lf][%.1lf]\nc{%p}[%.1lf][%.1lf][%.1lf]\n", face2->a, face2->a->v.x, face2->a->v.y, face2->a->v.z,
+			face2->b, face2->b->v.x, face2->b->v.y, face2->b->v.z,
+			face2->c, face2->c->v.x, face2->c->v.y, face2->c->v.z);
 }
 
 void			fdf_fton(t_face *f, t_node *n)

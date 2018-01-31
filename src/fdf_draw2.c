@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 11:24:06 by jquenel           #+#    #+#             */
-/*   Updated: 2018/01/06 21:12:43 by jquenel          ###   ########.fr       */
+/*   Updated: 2018/01/31 20:35:44 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int			fdf_draw_fdf(t_env *env)
 	mlx_put_image_to_window(MLX, WIN, IMG(ptr), 0, 0);
 	return (1);
 }
-/*
+
 void		read_face(t_env *env)
 {
 	int		i;
@@ -85,11 +85,11 @@ void		read_face(t_env *env)
 	l = MAP(nlist);
 	i = 0;
 	printf("MAP W : %d [][] MAP H : %d\n\n", MAP(w), MAP(h));
-	while (*l)
+	/*while (*l)
 	{
 		printf("node [x : %.1lf][y : %.1lf]\n", (*l)->v.x, (*l)->v.y);
 		l++;
-	}
+	}*/
 	while (f)
 	{
 		printf("*FACE#%3d\n", i);
@@ -99,16 +99,7 @@ void		read_face(t_env *env)
 				f->b->v.x, f->b->v.y, f->b->v.z, f->b);
 		printf("|	c [x : %.1lf][y : %.1lf][z : %.1lf][cddr : %p]\n",
 				f->c->v.x, f->c->v.y, f->c->v.z, f->c);
-		e = f->edge[0];
-		while (e)
-		{
-			printf("|		n1 [x : %.1lf][y : %.1lf][z : %.1lf][addr : %p]\n",
-				e->n1->v.x, e->n1->v.y, e->n1->v.z, e->n1);
-			printf("|		n2 [x : %.1lf][y : %.1lf][z : %.1lf][addr : %p]\n\n",
-				e->n2->v.x, e->n2->v.y, e->n2->v.z, e->n1);
-			e = e->next;
-		}
 		f = f->next;
 		i++;
 	}
-}*/
+}

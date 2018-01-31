@@ -6,23 +6,16 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 23:20:59 by jquenel           #+#    #+#             */
-/*   Updated: 2018/01/18 08:30:20 by jquenel          ###   ########.fr       */
+/*   Updated: 2018/01/31 23:15:38 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-#define MA		cb->main[0]
-#define MB		cb->main[1]
-#define MC		cb->main[2]
-#define MD		cb->main[3]
-#define OA		cb->opp[0]
-#define OB		cb->opp[1]
-#define OC		cb->opp[2]
-#define OD		cb->opp[3]
-
 void	fdf_wut_face(t_cube *cb, t_env *env)
 {
+	if (!cb)
+		return ;
 	if (cb->m == 4)
 	{
 		if (cb->o == 4 || cb->o == 3)
@@ -44,5 +37,5 @@ void	fdf_wut_face(t_cube *cb, t_env *env)
 			wut_face_3_0(cb, env);
 	}
 	else
-		wut_face_2_1(cb, env);
+		cb->o == 2 ? wut_face_2_2(cb, env) : wut_face_2_1(cb, env);
 }

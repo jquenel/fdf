@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 10:00:01 by jquenel           #+#    #+#             */
-/*   Updated: 2018/01/09 14:08:01 by jquenel          ###   ########.fr       */
+/*   Updated: 2018/01/30 02:23:12 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void		fdf_init_map(t_env *env)
 void		fdf_init_fal(t_env *env)
 {
 	ft_err(!(env->fal = malloc(sizeof(t_fal))), ERR_M, 0);
+	FAL(npool) = NULL;
+	FAL(fpool) = NULL;
 	FAL(center)[0] = FAL_WC;
 	FAL(center)[1] = FAL_HC;
 	FAL(w) = FAL_W;

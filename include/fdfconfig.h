@@ -22,7 +22,7 @@
 # define FAL_W			2.0
 # define FAL_H			2.0
 # define FAL_ZOOM		0.5
-# define FAL_SIZE		20
+# define FAL_SIZE		2
 # define FAL_ITER		30
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 20:11:12 by jquenel           #+#    #+#             */
-/*   Updated: 2018/01/03 17:38:11 by jquenel          ###   ########.fr       */
+/*   Updated: 2018/01/31 20:36:52 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ int			raster_draw(t_node *a, t_node *b, t_node *c, int i[3], t_env *env)
 	det[2] = fdf_orient2d(c->dv, a->dv, v);
 	if (det[0] >= 0 && det[1] >= 0 && det[2] >= 0)
 	{
-		fdf_addpixel(i[0], i[2],
+		fdf_addpixel(i[0], i[2],// C_WHITE, env);
 		CAM(cmode) ? fdf_get_color(a, b, c, &v, env) : C_WHITE, env);
-		MAP(zmap)[i[0] + i[2] * WIDTH] = 1;
+		//MAP(zmap)[i[0] + i[2] * WIDTH] = 1;
 	}
 	return (1);
 }
@@ -87,7 +87,7 @@ void		fdf_raster(t_node *a, t_node *b, t_node *c, t_env *env)
 		i[2] = i[1] - 1;
 		while (++(i[2]) <= bound[1])
 		{
-			if (!(MAP(zmap)[i[0] + i[2] * WIDTH]))
+			//if (!(MAP(zmap)[i[0] + i[2] * WIDTH]))
 				raster_draw(a, b, c, i, env);
 		}
 	}

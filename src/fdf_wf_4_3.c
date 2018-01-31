@@ -6,14 +6,14 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/18 00:51:04 by jquenel           #+#    #+#             */
-/*   Updated: 2018/01/18 03:41:49 by jquenel          ###   ########.fr       */
+/*   Updated: 2018/01/31 21:03:41 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "fdfcube.h"
 
-void	case_no_OD(t_cube *cb, t_env *env)
+void	case_no_od(t_cube *cb, t_env *env)
 {
 	fdf_addface(&MAP(face), fdf_newface(MD, OC, OA, env));
 	fdf_addface(&MAP(face), fdf_newface(MD, MC, OC, env));
@@ -25,7 +25,7 @@ void	case_no_OD(t_cube *cb, t_env *env)
 	fdf_addface(&MAP(face), fdf_newface(MB, OB, OC, env));
 }
 
-void	case_no_OC(t_cube *cb, t_env *env)
+void	case_no_oc(t_cube *cb, t_env *env)
 {
 	fdf_addface(&MAP(face), fdf_newface(MC, OB, OD, env));
 	fdf_addface(&MAP(face), fdf_newface(MC, MB, OB, env));
@@ -34,10 +34,10 @@ void	case_no_OC(t_cube *cb, t_env *env)
 	fdf_addface(&MAP(face), fdf_newface(MA, OA, MB, env));
 	fdf_addface(&MAP(face), fdf_newface(MB, OA, OB, env));
 	fdf_addface(&MAP(face), fdf_newface(MA, MD, OA, env));
-	fdf_addface(&MAP(face), fdf_newface(MD, OA, OD, env));
+	fdf_addface(&MAP(face), fdf_newface(MD, OD, OA, env));
 }
 
-void	case_no_OB(t_cube *cb, t_env *env)
+void	case_no_ob(t_cube *cb, t_env *env)
 {
 	fdf_addface(&MAP(face), fdf_newface(MB, OA, OC, env));
 	fdf_addface(&MAP(face), fdf_newface(MB, MA, OA, env));
@@ -46,10 +46,10 @@ void	case_no_OB(t_cube *cb, t_env *env)
 	fdf_addface(&MAP(face), fdf_newface(MD, MC, OD, env));
 	fdf_addface(&MAP(face), fdf_newface(MC, OC, OD, env));
 	fdf_addface(&MAP(face), fdf_newface(MA, MD, OA, env));
-	fdf_addface(&MAP(face), fdf_newface(MD, OA, OD, env));
+	fdf_addface(&MAP(face), fdf_newface(MD, OD, OA, env));
 }
 
-void	case_no_OA(t_cube *cb, t_env *env)
+void	case_no_oa(t_cube *cb, t_env *env)
 {
 	fdf_addface(&MAP(face), fdf_newface(MA, OD, OB, env));
 	fdf_addface(&MAP(face), fdf_newface(MA, MD, OD, env));
@@ -66,11 +66,11 @@ void	wut_face_4_3(t_cube *cb, t_env *env)
 	fdf_addface(&MAP(face), fdf_newface(MA, MB, MC, env));
 	fdf_addface(&MAP(face), fdf_newface(MA, MC, MD, env));
 	if (!cb->opp[0])
-		case_no_OA(cb, env);
+		case_no_oa(cb, env);
 	else if (!cb->opp[1])
-		case_no_OB(cb, env);
+		case_no_ob(cb, env);
 	else if (!cb->opp[2])
-		case_no_OC(cb, env);
+		case_no_oc(cb, env);
 	else
-		case_no_OD(cb, env);
+		case_no_od(cb, env);
 }

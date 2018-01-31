@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/21 17:50:18 by jquenel           #+#    #+#             */
-/*   Updated: 2018/01/17 23:31:48 by jquenel          ###   ########.fr       */
+/*   Updated: 2018/01/31 20:09:33 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ typedef struct			s_fal
 	double			w;
 	double			h;
 	double			start[4];
-	struct s_node	***nlist;
+	struct s_node	*nlist[FAL_SIZE * FAL_SIZE * FAL_SIZE];
 	struct s_node	*npool;
 	struct s_face	*fpool;
 }						t_fal;
@@ -97,11 +97,11 @@ typedef struct			s_face
 
 typedef struct			s_node
 {
-	t_v3d			v;
-	t_v3d			dv;
 	t_bool			lit;
 	t_bool			active;
 	double			fvalue;
+	t_v3d			v;
+	t_v3d			dv;
 	t_face			*face[MAX_NFACE];
 	struct s_node	*next;
 	struct s_node	*prev;

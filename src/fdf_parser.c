@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 10:19:47 by jquenel           #+#    #+#             */
-/*   Updated: 2018/01/03 15:50:01 by jquenel          ###   ########.fr       */
+/*   Updated: 2018/01/30 02:00:52 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void				fdf_parser(t_env *env, char *arg)
 	if ((fd = open(arg, O_RDONLY)) == -1)
 	{
 		env->map->type = 1;
-		fdfractol(env, arg);
+		fdfractol(env);
 	}
 	else
 	{

@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 23:27:10 by jquenel           #+#    #+#             */
-/*   Updated: 2018/01/17 23:29:13 by jquenel          ###   ########.fr       */
+/*   Updated: 2018/01/30 03:07:40 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ static int		get_fv(char cube, int *fv)
 	return (fv[0] + fv[1] + fv[2] + fv[3] + fv[4] + fv[5] - 3 < 0 ? 0 : 1);
 }
 
-void		fdf_cube_is_a_lie(t_cube *cb, char cube, t_node **cn, int *fv)
+t_cube			*fdf_cube_is_a_lie(t_cube *cb, char cube, t_node **cn, int *fv)
 {
 	if (!(get_fv(cube, fv)))
-		return ;
+		return (NULL);
 	if (fv[0] >= fv[1] && fv[0] >= fv[2] && fv[0] >= fv[3] &&
 		fv[0] >= fv[4] && fv[0] >= fv[5])
 		main_face_0(cb, cube, cn, fv);
@@ -68,4 +68,5 @@ void		fdf_cube_is_a_lie(t_cube *cb, char cube, t_node **cn, int *fv)
 		main_face_4(cb, cube, cn, fv);
 	else
 		main_face_5(cb, cube, cn, fv);
+	return (cb);
 }

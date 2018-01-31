@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 23:49:09 by jquenel           #+#    #+#             */
-/*   Updated: 2018/01/18 03:42:19 by jquenel          ###   ########.fr       */
+/*   Updated: 2018/01/31 20:44:32 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	wut_face_4_4(t_cube *cb, t_env *env)
 	fdf_addface(&MAP(face), fdf_newface(MB, OA, OB, env));
 	//face ADD'A'
 	fdf_addface(&MAP(face), fdf_newface(MA, MD, OA, env));
-	fdf_addface(&MAP(face), fdf_newface(MD, OA, OD, env));
+	fdf_addface(&MAP(face), fdf_newface(MD, OD, OA, env));
 	//face DCC'D'
 	fdf_addface(&MAP(face), fdf_newface(MD, OC, OD, env));
 	fdf_addface(&MAP(face), fdf_newface(MD, MC, OC, env));
