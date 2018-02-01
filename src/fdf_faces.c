@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 23:37:43 by jquenel           #+#    #+#             */
-/*   Updated: 2018/01/31 00:13:53 by jquenel          ###   ########.fr       */
+/*   Updated: 2018/02/01 00:19:58 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void			fdf_addface(t_face **face1, t_face *face2)
 {
 	t_face		*tmp;
 
+	printf("adding a face...\n");
 	if (!(*face1))
 		*face1 = face2;
 	else

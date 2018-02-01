@@ -1,9 +1,9 @@
 #ifndef FDFCONFIG_H
 
 # define FDFCONFIG_H
-# define MAX_NFACE		16
-# define WIDTH			800
-# define HEIGHT			600
+# define MAX_NFACE		40
+# define WIDTH			2000
+# define HEIGHT			1400
 # define ZOOM			16
 # define CAM_START_X	0
 # define CAM_START_Y	20
@@ -22,7 +22,7 @@
 # define FAL_W			2.0
 # define FAL_H			2.0
 # define FAL_ZOOM		0.5
-# define FAL_SIZE		2
+# define FAL_SIZE		50
 # define FAL_ITER		30
 
 #endif

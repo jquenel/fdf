@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 11:24:06 by jquenel           #+#    #+#             */
-/*   Updated: 2018/01/31 20:35:44 by jquenel          ###   ########.fr       */
+/*   Updated: 2018/02/01 00:32:30 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int			fdf_draw_fdf(t_env *env)
 {
 	t_face		*face;
 
+//	read_face(env);
 	mlx_clear_window(MLX, WIN);
 	fdf_applymatrices(env);
 	fdf_move(env);
@@ -94,11 +95,11 @@ void		read_face(t_env *env)
 	{
 		printf("*FACE#%3d\n", i);
 		printf("|	a [x : %.1lf][y : %.1lf][z : %.1lf][addr : %p]\n",
-				f->a->v.x, f->a->v.y, f->a->v.z, f->a);
+				f->a->dv.x, f->a->dv.y, f->a->dv.z, f->a);
 		printf("|	b [x : %.1lf][y : %.1lf][z : %.1lf][bddr : %p]\n",
-				f->b->v.x, f->b->v.y, f->b->v.z, f->b);
+				f->b->dv.x, f->b->dv.y, f->b->dv.z, f->b);
 		printf("|	c [x : %.1lf][y : %.1lf][z : %.1lf][cddr : %p]\n",
-				f->c->v.x, f->c->v.y, f->c->v.z, f->c);
+				f->c->dv.x, f->c->dv.y, f->c->dv.z, f->c);
 		f = f->next;
 		i++;
 	}

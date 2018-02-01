@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 23:27:16 by jquenel           #+#    #+#             */
-/*   Updated: 2018/01/31 19:48:39 by jquenel          ###   ########.fr       */
+/*   Updated: 2018/01/31 23:39:05 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_cube			*fdf_get_cube(int *i, t_cube *cb, t_node **nlist, t_node **cn)
 	companion_nodes(i[0], i[1], i[2], nlist, cn);
 	printf("got the companion_nodes\n");
 	cube = companion_cube(cn);
-	printf("got the companion_cube : %hhd\n", cube);
+	printf("got the companion_cube : %hhu\n", cube);
 	cb = fdf_cube_is_a_lie(cb, cube, cn, fv);
 	printf("understood the lie\n");
 	return (cb);

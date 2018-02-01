@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 23:20:59 by jquenel           #+#    #+#             */
-/*   Updated: 2018/01/31 23:15:38 by jquenel          ###   ########.fr       */
+/*   Updated: 2018/02/01 00:10:33 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	fdf_wut_face(t_cube *cb, t_env *env)
 {
-	if (!cb)
+	if (!cb || cb->m + cb->o < 3)
 		return ;
 	if (cb->m == 4)
 	{
@@ -38,4 +38,5 @@ void	fdf_wut_face(t_cube *cb, t_env *env)
 	}
 	else
 		cb->o == 2 ? wut_face_2_2(cb, env) : wut_face_2_1(cb, env);
+	printf("///////exiting wutface///////////\n");
 }

@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 11:24:06 by jquenel           #+#    #+#             */
-/*   Updated: 2018/01/31 23:30:27 by jquenel          ###   ########.fr       */
+/*   Updated: 2018/02/01 00:30:29 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,14 @@ static void	init_cloud(t_env *env)
 		}
 	}
 }
-
+/*
 t_bool		evaluate3d(t_node *point, double c[2], int iter)
 {
 	return (TRUE);
 }
+*/
 
-/*
+
 t_bool		evaluate3d(t_node *point, double c[2], int iter)
 {
 	double	zr;
@@ -91,7 +92,7 @@ t_bool		evaluate3d(t_node *point, double c[2], int iter)
 	point->fvalue = (zr * zr + zi * zi) / 4 * iter + i / 2 * 0x00020101;
 	return ((point->lit = TRUE));
 }
-*/
+
 void		build_a_test(t_env *env)
 {
 	FAL(nlist)[0]->lit = 0;
@@ -130,7 +131,7 @@ void		fdfractol(t_env *env)
 			}
 		}
 	}
-	build_a_test(env);
+	//build_a_test(env);
 	printf("computed all points\n");
 	printf("hello\n");
 	fdf_clean_cloud(env);

@@ -61,7 +61,7 @@ OBJ_NAME=	$(SRC_NAME:.c=.o)
 ##		COMPILER FLAGS
 ##
 
-CFLAGS=		-Wextra -Wall -O3 #-fsanitize=address
+CFLAGS=		-Wextra -Wall -O3 -fsanitize=address
 
 CC=			gcc
 

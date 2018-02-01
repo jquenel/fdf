@@ -6,7 +6,7 @@
 /*   By: jquenel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 22:57:40 by jquenel           #+#    #+#             */
-/*   Updated: 2018/01/31 20:06:52 by jquenel          ###   ########.fr       */
+/*   Updated: 2018/02/01 00:39:01 by jquenel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int		is_lit(int i, int j, int k, t_env *env)
 static int		unlit_storage(int i, int j, int k, t_env *env)
 {
 	FAL(nlist)[IJK]->active = 0;
-	if (!(is_lit(i - 1, j - 1, k - 1, env) + is_lit(i - 1, j - 1, k, env) +
+/*	if (!(is_lit(i - 1, j - 1, k - 1, env) + is_lit(i - 1, j - 1, k, env) +
 		is_lit(i - 1, j - 1, k + 1, env) + is_lit(i - 1, j, k - 1, env) +
 		is_lit(i - 1, j + 1, k - 1, env) + is_lit(i - 1, j, k, env) +
 		is_lit(i - 1, j, k + 1, env) + is_lit(i - 1, j + 1, k, env) +
@@ -38,7 +38,7 @@ static int		unlit_storage(int i, int j, int k, t_env *env)
 		is_lit(i + 1, j + 1, k - 1, env) + is_lit(i + 1, j, k, env) +
 		is_lit(i + 1, j, k + 1, env) + is_lit(i + 1, j + 1, k, env) +
 		is_lit(i + 1, j + 1, k + 1, env)))
-		fdf_move_node(&FAL(npool), &MAP(node), FAL(nlist)[IJK]);
+		fdf_move_node(&FAL(npool), &MAP(node), FAL(nlist)[IJK]);*/
 	return (0);
 }
 
@@ -46,19 +46,19 @@ static int		activate(int i, int j, int k, t_env *env)
 {
 	if (!(FAL(nlist)[IJK]->lit))
 		return (unlit_storage(i, j, k, env));
-	else if (is_lit(i - 1, j - 1, k - 1, env) + is_lit(i - 1, j - 1, k, env) +
-		is_lit(i - 1, j - 1, k + 1, env) + is_lit(i - 1, j, k - 1, env) +
-		is_lit(i - 1, j + 1, k - 1, env) + is_lit(i - 1, j, k, env) +
-		is_lit(i - 1, j, k + 1, env) + is_lit(i - 1, j + 1, k, env) +
-		is_lit(i - 1, j + 1, k + 1, env) + is_lit(i, j - 1, k - 1, env) +
-		is_lit(i, j - 1, k, env) + is_lit(i, j - 1, k + 1, env) +
-		is_lit(i, j, k - 1, env) + is_lit(i, j + 1, k - 1, env) +
-		is_lit(i, j + 1, k, env) + is_lit(i, j, k + 1, env) +
-		is_lit(i + 1, j - 1, k - 1, env) + is_lit(i + 1, j - 1, k, env) +
-		is_lit(i + 1, j - 1, k + 1, env) + is_lit(i + 1, j, k - 1, env) +
-		is_lit(i + 1, j + 1, k - 1, env) + is_lit(i + 1, j, k, env) +
-		is_lit(i + 1, j, k + 1, env) + is_lit(i + 1, j + 1, k, env) +
-		is_lit(i + 1, j + 1, k + 1, env) == 26)
+	else if (is_lit(i - 1, j - 1, k - 1, env) && is_lit(i - 1, j - 1, k, env) &&
+		is_lit(i - 1, j - 1, k + 1, env) && is_lit(i - 1, j, k - 1, env) &&
+		is_lit(i - 1, j + 1, k - 1, env) && is_lit(i - 1, j, k, env) &&
+		is_lit(i - 1, j, k + 1, env) && is_lit(i - 1, j + 1, k, env) &&
+		is_lit(i - 1, j + 1, k + 1, env) && is_lit(i, j - 1, k - 1, env) &&
+		is_lit(i, j - 1, k, env) && is_lit(i, j - 1, k + 1, env) &&
+		is_lit(i, j, k - 1, env) && is_lit(i, j + 1, k - 1, env) &&
+		is_lit(i, j + 1, k, env) && is_lit(i, j, k + 1, env) &&
+		is_lit(i + 1, j - 1, k - 1, env) && is_lit(i + 1, j - 1, k, env) &&
+		is_lit(i + 1, j - 1, k + 1, env) && is_lit(i + 1, j, k - 1, env) &&
+		is_lit(i + 1, j + 1, k - 1, env) && is_lit(i + 1, j, k, env) &&
+		is_lit(i + 1, j, k + 1, env) && is_lit(i + 1, j + 1, k, env) &&
+		is_lit(i + 1, j + 1, k + 1, env))
 		return ((FAL(nlist)[IJK]->active = 0));
 	else
 		return ((FAL(nlist)[IJK]->active = 1));
@@ -75,7 +75,7 @@ void		fdf_clean_cloud(t_env *env)
 		{
 			while (i[2]--)
 			{
-				//printf("{%d}{%d}{%d}\n", i[0], i[1], i[2]);
+				printf("cleaning {%d}{%d}{%d}\n", i[0], i[1], i[2]);
 				activate(i[0], i[1], i[2], env);
 			}
 		}
